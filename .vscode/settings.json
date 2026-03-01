@@ -1,0 +1,15 @@
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml",
+    "tsconfig.json": "tsconfig.*.json",
+    "vitest.config.mts": "vitest.setup.ts, vitest.workspace.ts"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "i18n-ally.localesPaths": ["packages/locale"],
+  "cSpell.words": ["tdesign"]
+}

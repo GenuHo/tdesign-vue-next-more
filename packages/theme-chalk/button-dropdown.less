@@ -1,0 +1,13 @@
+@import url('./mixins/mixin.less');
+
+@tm-button-dropdown-space: 8px;
+
+.tm-b(button-dropdown, {
+  display: flex;
+  align-items: center;
+  gap: @tm-button-dropdown-space;
+
+  .@{prefix}-button {
+    flex-shrink: 0;
+  }
+});

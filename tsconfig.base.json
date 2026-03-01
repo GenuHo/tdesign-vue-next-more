@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2018",
+    "module": "esnext",
+    "baseUrl": ".",
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "rootDir": ".",
+    "types": [],
+    "paths": {
+      "@tdesign-vue-next-more/components": ["packages/components"],
+      "@tdesign-vue-next-more/utils": ["packages/utils"],
+      "@tdesign-vue-next-more/hooks": ["packages/hooks"],
+      "@tdesign-vue-next-more/directives": ["packages/directives"],
+      "@tdesign-vue-next-more/constants": ["packages/constants"],
+      "@tdesign-vue-next-more/locale": ["packages/locale"],
+      "tdesign-vue-next-more": ["packages/tdesign-vue-next-more"]
+    },
+    "preserveSymlinks": true
+  }
+}

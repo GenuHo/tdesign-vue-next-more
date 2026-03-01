@@ -1,0 +1,52 @@
+// TODO 样式的相关封装逻辑待改造
+@import url('./config.less');
+
+// Block 块混合宏 - 直接定义样式
+.tm-b(@block, @rules) {
+  @B: ~'@{tm-prefix}@{tm-common-separator}@{block}';
+  .@{B} {
+    @rules(); /* stylelint-disable-line */
+  }
+}
+
+// Element 元素混合宏
+.tm-e(@element, @rules) {
+  @BE: ~'@{B}@{tm-element-separator}@{element}';
+  .@{BE} {
+    @rules(); /* stylelint-disable-line */
+  }
+}
+
+// 拼接在 Block 块的修饰符
+.tm-bm(@modifier, @rules) {
+  @BM: ~'@{B}@{tm-modifier-separator}@{modifier}';
+  .@{BM} {
+    @rules(); /* stylelint-disable-line */
+  }
+}
+
+// 拼接在 Element 元素的修饰符
+.tm-em(@modifier, @rules) {
+  @BEM: ~'@{BE}@{tm-modifier-separator}@{modifier}';
+  .@{BEM} {
+    @rules(); /* stylelint-disable-line */
+  }
+}
+
+// State
+.tm-is(@state, @rules) {
+  .@{tm-state-prefix}@{state} {
+    @rules(); /* stylelint-disable-line */
+  }
+}
+
+.tm-interactive(@cursor: pointer) {
+  cursor: @cursor;
+  user-select: none;
+}
+
+.tm-overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,8 @@
+{
+  "name": "@tdesign-vue-next-more/theme-chalk",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.ts",
+  "module": "index.ts",
+  "scripts": {}
+}

@@ -4,6 +4,7 @@ import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 import pluginVitest from '@vitest/eslint-plugin'
 import eslintConfigPrettier from 'eslint-config-prettier/flat'
+import adminAppEslintrcAutoImportJson from './admin-app/.eslintrc-auto-import.json'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -12,6 +13,16 @@ export default [
     ignores: ['node_modules', '**/dist/**'],
   },
   { languageOptions: { globals: globals.browser } },
+  // admin-app项目，增加增加auto-imports的相关globals
+  {
+    files: ['admin-app/**/*.{js,mjs,cjs,ts,tsx,vue}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...adminAppEslintrcAutoImportJson.globals,
+      },
+    },
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/essential'],

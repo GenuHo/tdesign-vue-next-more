@@ -1,0 +1,28 @@
+@import url('./mixins/mixin.less');
+
+.tm-b(composite-search-tags, {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  .tm-e(tag, {
+    max-width: 100%;
+    display: inline-flex;
+
+    span {
+      display: inline-block;
+      flex-grow: 0;
+      .tm-overflow-ellipsis();
+    };
+  });
+
+  .tm-e(operation-tag, {
+    .tm-interactive();
+    padding: 0px;
+    background-color: transparent;
+    color:  @text-color-secondary;
+    &:hover {
+     color: @text-color-primary;
+    }
+  });
+});

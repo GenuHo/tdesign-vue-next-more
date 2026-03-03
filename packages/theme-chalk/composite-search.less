@@ -1,0 +1,41 @@
+@import url('./mixins/mixin.less');
+
+.tm-b(composite-search, {
+  width: 460px;
+  max-width: 100%;
+  display: flex;
+
+  .tm-e(search-label, {
+    display: flex;
+    align-items: center;
+
+    .tm-e(icon-search, {
+      margin-right: 4px;
+    });
+
+    .tm-e(icon-down, {
+      transition: all 0.2s ease-in-out;
+      margin-left: 4px;
+    });
+  });
+
+  .tm-e(search-input, {
+
+    .t-input {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .t-input--focused {
+      box-shadow: none;
+    }
+  });
+
+  .tm-e(search-button, {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  });
+});

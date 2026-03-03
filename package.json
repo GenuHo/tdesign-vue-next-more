@@ -12,7 +12,8 @@
     "format": "prettier . --write",
     "prepare": "husky",
     "commitlint": "commitlint",
-    "typecheck:app": "vue-tsc -p tsconfig.app.json --composite false --noEmit"
+    "typecheck:app": "vue-tsc -p tsconfig.app.json --composite false --noEmit",
+    "typecheck:admin-app": "pnpm -C admin-app typecheck"
   },
   "keywords": [],
   "author": "",

@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build"
+    "typecheck": "vue-tsc --build"
   },
   "dependencies": {
     "@vueuse/core": "^13.9.0",

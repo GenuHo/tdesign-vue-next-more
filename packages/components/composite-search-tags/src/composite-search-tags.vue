@@ -26,7 +26,7 @@ import { useNamespace, useLocale } from '@tdesign-vue-next-more/hooks'
 import type {
   TmSearchPayload,
   TmSearchPayloadValue,
-} from './composite-search-type'
+} from '@tdesign-vue-next-more/components'
 import type { TmCompositeSearchTagsProps } from './composite-search-tags-type'
 
 defineOptions({

@@ -12,5 +12,8 @@ export default {
     compositeSearch: {
       search: '搜索',
     },
+    table: {
+      operation: '操作',
+    },
   },
 }

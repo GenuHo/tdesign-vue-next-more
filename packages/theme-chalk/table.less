@@ -1,0 +1,39 @@
+@import url('./mixins/mixin.less');
+
+// TODO 待完善变量相关，如何去和tdesign-vue-next规范保持一致
+@tm-table-space: 8px;
+
+.tm-b(table, {
+  background-color: @bg-color-container;
+
+  .tm-e(top, {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: @tm-table-space;
+    gap: @tm-table-space;
+  });
+
+  .tm-e(top-left, {
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
+    overflow: hidden;
+    gap: @tm-table-space;
+  });
+
+  .tm-e(search, {
+    .@{tm-prefix}-composite-search-tags {
+      margin-top: @tm-table-space;
+    }
+  });
+
+  td .@{tm-prefix}-button-dropdown {
+    .@{prefix}-button {
+      padding: 0px;
+
+      &__suffix:not(:empty) {
+        margin-left: 0px;
+      }
+    }
+  }
+});

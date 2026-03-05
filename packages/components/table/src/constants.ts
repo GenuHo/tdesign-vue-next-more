@@ -1,8 +1,9 @@
 import type { EnhancedTableProps } from 'tdesign-vue-next'
-import type { OmitKeysToTuple } from '@tdesign-vue-next-more/utils'
+import type { OwnKeysStrictUnionTuple } from '@tdesign-vue-next-more/utils'
 import type { TmTableProps } from './table-type'
 
-export const TM_TABLE_OWN_KEYS: OmitKeysToTuple<
+export const TM_TABLE_OWN_KEYS: OwnKeysStrictUnionTuple<
   TmTableProps,
-  EnhancedTableProps
+  EnhancedTableProps,
+  ['request', 'topRightButtons', 'topLeftButtonDropdown']
 > = ['request', 'topRightButtons', 'topLeftButtonDropdown'] as const

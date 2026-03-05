@@ -12,9 +12,13 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ChevronDownIcon: typeof import('tdesign-icons-vue-next')['ChevronDownIcon']
+    ClearIcon: typeof import('tdesign-icons-vue-next')['ClearIcon']
     MenuFoldIcon: typeof import('tdesign-icons-vue-next')['MenuFoldIcon']
+    RefreshIcon: typeof import('tdesign-icons-vue-next')['RefreshIcon']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchIcon: typeof import('tdesign-icons-vue-next')['SearchIcon']
     TAside: typeof import('tdesign-vue-next')['Aside']
     TButton: typeof import('tdesign-vue-next')['Button']
     TCard: typeof import('tdesign-vue-next')['Card']
@@ -22,6 +26,9 @@ declare module 'vue' {
     TConfigProvider: typeof import('tdesign-vue-next')['ConfigProvider']
     TContent: typeof import('tdesign-vue-next')['Content']
     TDrawer: typeof import('tdesign-vue-next')['Drawer']
+    TDropdown: typeof import('tdesign-vue-next')['Dropdown']
+    TDropdownItem: typeof import('tdesign-vue-next')['DropdownItem']
+    TDropdownMenu: typeof import('tdesign-vue-next')['DropdownMenu']
     TForm: typeof import('tdesign-vue-next')['Form']
     TFormItem: typeof import('tdesign-vue-next')['FormItem']
     TIcon: typeof import('tdesign-vue-next')['Icon']
@@ -34,15 +41,21 @@ declare module 'vue' {
     TSubmenu: typeof import('tdesign-vue-next')['Submenu']
     TSwiper: typeof import('tdesign-vue-next')['Swiper']
     TSwiperItem: typeof import('tdesign-vue-next')['SwiperItem']
+    TTag: typeof import('tdesign-vue-next')['Tag']
+    TTooltip: typeof import('tdesign-vue-next')['Tooltip']
     TTypographyTitle: typeof import('tdesign-vue-next')['Title']
   }
 }
 
 // For TSX support
 declare global {
+  const ChevronDownIcon: typeof import('tdesign-icons-vue-next')['ChevronDownIcon']
+  const ClearIcon: typeof import('tdesign-icons-vue-next')['ClearIcon']
   const MenuFoldIcon: typeof import('tdesign-icons-vue-next')['MenuFoldIcon']
+  const RefreshIcon: typeof import('tdesign-icons-vue-next')['RefreshIcon']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
+  const SearchIcon: typeof import('tdesign-icons-vue-next')['SearchIcon']
   const TAside: typeof import('tdesign-vue-next')['Aside']
   const TButton: typeof import('tdesign-vue-next')['Button']
   const TCard: typeof import('tdesign-vue-next')['Card']
@@ -50,6 +63,9 @@ declare global {
   const TConfigProvider: typeof import('tdesign-vue-next')['ConfigProvider']
   const TContent: typeof import('tdesign-vue-next')['Content']
   const TDrawer: typeof import('tdesign-vue-next')['Drawer']
+  const TDropdown: typeof import('tdesign-vue-next')['Dropdown']
+  const TDropdownItem: typeof import('tdesign-vue-next')['DropdownItem']
+  const TDropdownMenu: typeof import('tdesign-vue-next')['DropdownMenu']
   const TForm: typeof import('tdesign-vue-next')['Form']
   const TFormItem: typeof import('tdesign-vue-next')['FormItem']
   const TIcon: typeof import('tdesign-vue-next')['Icon']
@@ -62,5 +78,7 @@ declare global {
   const TSubmenu: typeof import('tdesign-vue-next')['Submenu']
   const TSwiper: typeof import('tdesign-vue-next')['Swiper']
   const TSwiperItem: typeof import('tdesign-vue-next')['SwiperItem']
+  const TTag: typeof import('tdesign-vue-next')['Tag']
+  const TTooltip: typeof import('tdesign-vue-next')['Tooltip']
   const TTypographyTitle: typeof import('tdesign-vue-next')['Title']
 }

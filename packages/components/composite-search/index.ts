@@ -1,8 +1,10 @@
-// TODO withInstall
-// TODO export default
+import { withInstall } from '@tdesign-vue-next-more/utils'
+import type { SFCWithInstall } from '@tdesign-vue-next-more/utils'
 import _TmCompositeSearch from './src/composite-search.vue'
 
-export const TmCompositeSearch = _TmCompositeSearch
+export const TmCompositeSearch: SFCWithInstall<typeof _TmCompositeSearch> =
+  withInstall(_TmCompositeSearch)
+export default TmCompositeSearch
 
 export * from './src/composite-search-type'
 

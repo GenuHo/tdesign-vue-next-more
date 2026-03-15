@@ -1,9 +1,11 @@
-// TODO withInstall
-// TODO export default
+import { withInstall } from '@tdesign-vue-next-more/utils'
+import type { SFCWithInstall } from '@tdesign-vue-next-more/utils'
 import _TmButtonDropdown from './src/button-dropdown.tsx'
 
-export const TmButtonDropdown = _TmButtonDropdown
+export const TmButtonDropdown: SFCWithInstall<typeof _TmButtonDropdown> =
+  withInstall(_TmButtonDropdown)
+export default TmButtonDropdown
 
 export * from './src/button-dropdown-type'
-export * from './src/constants'
+
 export * from './src/instance'

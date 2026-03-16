@@ -1,3 +1,4 @@
 packages:
-  - 'packages/*'
-  - 'admin-app'
+  - packages/*
+  - admin-app
+  - docs

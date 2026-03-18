@@ -3,23 +3,22 @@
 layout: home
 
 hero:
-  name: "TMore"
-  text: "基于 TDesign Vue3 的扩展组件库"
-  tagline: My great project tagline
+  name: 'TMore'
+  text: '基于 TDesign Vue3 的扩展组件库'
+  tagline: 开箱即用的表格、表单等交互组件
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 指南
+      link: /zh-cn/guide/design
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 组件
+      link: /zh-cn/component/overview
 
 features:
-  - title: Feature A
+  - title: TODO Feature A
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
+  - title: TODO Feature B
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
+  - title: TODO Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-

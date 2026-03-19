@@ -1,5 +1,9 @@
 import path from 'path'
 
 export const docRoot = path.join(__dirname, '../../')
-export const vitepressRoot = path.join(docRoot, '/.vitepress')
-export const localeRoot = path.join(vitepressRoot, '/locale')
+
+export const docVitepressConfigRoot = path.join(docRoot, '/.vitepress')
+
+export const docSrcRoot = path.join(docRoot, '/src')
+
+export const docLocaleRoot = path.join(docVitepressConfigRoot, '/locale')

@@ -1,23 +1,23 @@
 import type { DefaultTheme } from 'vitepress'
-import { localeRoot } from '../utils/path'
-import path from 'path'
-import { createRequire } from 'module'
-
-const _require = createRequire(import.meta.url)
+import componentSidebarLocale from '../locale/pages/component-sidebar.json'
+import guideSidebarLocale from '../locale/pages/guide-sidebar.json'
+import { DEFAULT_LANG } from '../constants/lang'
 
 const getGuideSidebarByLang = (lang: string): DefaultTheme.SidebarItem[] => {
-  const sidebar = _require(
-    path.join(localeRoot, lang, '/pages/guide-sidebar.json'),
-  )
+  const sidebar = guideSidebarLocale[lang as keyof typeof guideSidebarLocale]
+    ? guideSidebarLocale[lang as keyof typeof guideSidebarLocale]
+    : guideSidebarLocale[DEFAULT_LANG]
   return sidebar
 }
 
 const getComponentSidebarByLang = (
   lang: string,
 ): DefaultTheme.SidebarItem[] => {
-  const sidebar = _require(
-    path.join(localeRoot, lang, '/pages/component-sidebar.json'),
-  )
+  const sidebar = componentSidebarLocale[
+    lang as keyof typeof componentSidebarLocale
+  ]
+    ? componentSidebarLocale[lang as keyof typeof componentSidebarLocale]
+    : componentSidebarLocale[DEFAULT_LANG]
   return sidebar
 }
 

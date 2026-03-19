@@ -1,13 +1,12 @@
 import type { DefaultTheme } from 'vitepress'
-import { localeRoot } from '../utils/path'
-import path from 'path'
-import { createRequire } from 'module'
 import { isExternalURL } from '../utils/url'
-
-const _require = createRequire(import.meta.url)
+import navLocale from '../locale/pages/nav.json'
+import { DEFAULT_LANG } from '../constants/lang'
 
 export const getNavByLang = (lang: string): DefaultTheme.NavItem[] => {
-  const nav = _require(path.join(localeRoot, lang, '/pages/nav.json'))
+  const nav = navLocale[lang as keyof typeof navLocale]
+    ? navLocale[lang as keyof typeof navLocale]
+    : navLocale[DEFAULT_LANG]
   return nav.map((item: any) => {
     return {
       ...item,

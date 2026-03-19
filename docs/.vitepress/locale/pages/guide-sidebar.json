@@ -1,0 +1,14 @@
+{
+  "zh-cn": [
+    {
+      "text": "设计",
+      "items": [{ "text": "设计", "link": "/guide/design" }]
+    }
+  ],
+  "en": [
+    {
+      "text": "Design",
+      "items": [{ "text": "Design", "link": "/guide/design" }]
+    }
+  ]
+}

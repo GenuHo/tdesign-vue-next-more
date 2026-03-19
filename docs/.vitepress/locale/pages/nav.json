@@ -1,0 +1,10 @@
+{
+  "zh-cn": [
+    { "text": "指南", "link": "/guide/design" },
+    { "text": "组件", "link": "/component/overview" }
+  ],
+  "en": [
+    { "text": "Guide", "link": "/guide/design" },
+    { "text": "Component", "link": "/component/overview" }
+  ]
+}

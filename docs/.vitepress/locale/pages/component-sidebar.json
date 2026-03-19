@@ -1,0 +1,14 @@
+{
+  "zh-cn": [
+    {
+      "text": "总览",
+      "items": [{ "text": "总览", "link": "/component/overview" }]
+    }
+  ],
+  "en": [
+    {
+      "text": "Overview",
+      "items": [{ "text": "Overview", "link": "/component/overview" }]
+    }
+  ]
+}

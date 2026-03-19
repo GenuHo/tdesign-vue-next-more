@@ -6,7 +6,6 @@ import { getNavByLang } from './nav'
 export default defineConfig({
   srcDir: 'src',
   title: 'TMore',
-  description: '基于 TDesign Vue3 的扩展组件库',
   // https://vitepress.dev/reference/default-theme-config
   themeConfig: {
     nav: getNavByLang('zh-cn'),

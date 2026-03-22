@@ -2,11 +2,27 @@ import type { DefaultTheme } from 'vitepress'
 import componentSidebarLocale from '../locale/pages/component-sidebar.json'
 import guideSidebarLocale from '../locale/pages/guide-sidebar.json'
 import { DEFAULT_LANG } from '../constants/lang'
+import { isExternalURL } from '../utils/url'
+
+const linkAddLocalePrefix = (
+  sidebar: DefaultTheme.SidebarItem[],
+  lang: string,
+) => {
+  sidebar.forEach((item) => {
+    if (item.link && !isExternalURL(item.link)) {
+      item.link = `/${lang}${item.link}`
+    }
+    if (item.items) {
+      linkAddLocalePrefix(item.items, lang)
+    }
+  })
+}
 
 const getGuideSidebarByLang = (lang: string): DefaultTheme.SidebarItem[] => {
   const sidebar = guideSidebarLocale[lang as keyof typeof guideSidebarLocale]
     ? guideSidebarLocale[lang as keyof typeof guideSidebarLocale]
     : guideSidebarLocale[DEFAULT_LANG]
+  linkAddLocalePrefix(sidebar, lang)
   return sidebar
 }
 
@@ -18,6 +34,7 @@ const getComponentSidebarByLang = (
   ]
     ? componentSidebarLocale[lang as keyof typeof componentSidebarLocale]
     : componentSidebarLocale[DEFAULT_LANG]
+  linkAddLocalePrefix(sidebar, lang)
   return sidebar
 }
 

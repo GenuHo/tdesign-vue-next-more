@@ -31,9 +31,7 @@ export default [
     languageOptions: {
       parserOptions: { parser: tseslint.parser, ecmaFeatures: { jsx: true } },
     },
-    rules: {
-      'vue/multi-word-component-names': 'off',
-    },
+    rules: {},
   },
   { files: ['**/__tests__/*'], ...pluginVitest.configs.recommended },
   {
@@ -47,6 +45,7 @@ export default [
           disallowTypeAnnotations: false,
         },
       ],
+      'vue/multi-word-component-names': 'off',
     },
   },
   eslintConfigPrettier,

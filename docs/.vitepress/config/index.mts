@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
 import { getLocales } from './locales'
 import { getNavByLang } from './nav'
+import { mdPlugin } from '../plugins/md-plugins'
+import { markdownTransformPlugin } from '../plugins/vite-plugins/markdown-transform'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -14,4 +16,12 @@ export default defineConfig({
     ],
   },
   locales: getLocales(),
+  markdown: {
+    config: (md) => {
+      mdPlugin(md)
+    },
+  },
+  vite: {
+    plugins: [markdownTransformPlugin()],
+  },
 })

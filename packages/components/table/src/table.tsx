@@ -22,10 +22,10 @@ import {
   TmCompositeSearchTags,
   TmCompositeSearch,
   TmButtonDropdown,
-  TM_TABLE_OWN_KEYS,
   TM_OPERATION_COL_KEY,
   useColumnCalcWidth,
 } from '@tdesign-vue-next-more/components'
+import { TM_TABLE_OWN_KEYS } from './constants'
 import { defaultTableTopRightButtons } from './table-default'
 
 import type { PageInfo, PrimaryTableCol, TableRowData } from 'tdesign-vue-next'

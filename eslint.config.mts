@@ -10,7 +10,12 @@ import adminAppEslintrcAutoImportJson from './admin-app/.eslintrc-auto-import.js
 export default [
   { files: ['**/*.{js,mjs,cjs,ts,tsx,vue}'] },
   {
-    ignores: ['node_modules', '**/dist/**'],
+    ignores: [
+      'node_modules',
+      '**/dist/**',
+      'components.d.ts',
+      'auto-imports.d.ts',
+    ],
   },
   { languageOptions: { globals: globals.browser } },
   // admin-app项目，增加增加auto-imports的相关globals

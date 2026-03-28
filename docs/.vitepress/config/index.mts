@@ -3,6 +3,8 @@ import { getLocales } from './locales'
 import { getNavByLang } from './nav'
 import { mdPlugin } from '../plugins/md-plugins'
 import { markdownTransformPlugin } from '../plugins/vite-plugins/markdown-transform'
+import Components from 'unplugin-vue-components/vite'
+import { TDesignResolver } from '@tdesign-vue-next/auto-import-resolver'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -22,6 +24,17 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [markdownTransformPlugin()],
+    plugins: [
+      markdownTransformPlugin(),
+      Components({
+        resolvers: [
+          TDesignResolver({
+            library: 'vue-next',
+            resolveIcons: true,
+          }),
+        ],
+        include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/, /\.jsx$/],
+      }),
+    ],
   },
 })

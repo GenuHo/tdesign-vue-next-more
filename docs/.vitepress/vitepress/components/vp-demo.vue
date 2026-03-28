@@ -1,33 +1,103 @@
 <template>
-  <div>
-    <slot name="source"></slot>
-  </div>
+  <template v-if="!source">
+    <div>{{ locale['component-demo-under-construction'] }}</div>
+  </template>
+  <template v-else>
+    <div v-html="description" />
+    <div class="example">
+      <div class="showcase">
+        <slot name="source"></slot>
+      </div>
+      <div class="operation">
+        <t-space size="small">
+          <t-button shape="square" variant="text" @click="copyCode">
+            <copy-icon />
+          </t-button>
+          <t-button
+            shape="square"
+            variant="text"
+            @click="codeVisible = !codeVisible"
+          >
+            <code-icon />
+          </t-button>
+        </t-space>
+      </div>
+      <div class="code" v-show="codeVisible" v-html="source"></div>
+    </div>
+  </template>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { useLang } from '../hooks/use-lang'
+import vpDemoLocale from '../../locale/vp-components/vp-demo.json'
+import { useClipboard } from '@vueuse/core'
+import { MessagePlugin } from 'tdesign-vue-next'
+
+const lang = useLang()
+const locale = computed(
+  () => vpDemoLocale[lang.value as keyof typeof vpDemoLocale],
+)
 
 const props = defineProps<{
-  source: string
-  path: string
-  rawSource: string
-  description: string
+  source?: string
+  path?: string
+  rawSource?: string
+  description?: string
 }>()
 
 const source = computed(() => {
-  return decodeURIComponent(props.source)
+  return decodeURIComponent(props.source || '')
 })
-const path = computed(() => {
-  return decodeURIComponent(props.path)
-})
+// const path = computed(() => {
+//   return decodeURIComponent(props.path || '')
+// })
 const rawSource = computed(() => {
-  return decodeURIComponent(props.rawSource)
+  return decodeURIComponent(props.rawSource || '')
 })
 const description = computed(() => {
-  return decodeURIComponent(props.description)
+  return decodeURIComponent(props.description || '')
 })
-console.log(source.value)
-console.log(path.value)
-console.log(rawSource.value)
-console.log(description.value)
+
+const codeVisible = ref(false)
+
+const { copy, isSupported } = useClipboard({
+  source: rawSource.value,
+  read: false,
+})
+
+const copyCode = async () => {
+  if (!isSupported) {
+    MessagePlugin.error(locale.value['not-support-copy-error'])
+  }
+  try {
+    await copy()
+    MessagePlugin.success(locale.value['copy-success'])
+  } catch (e: any) {
+    MessagePlugin.error(e.message)
+  }
+}
 </script>
+
+<style lang="less" scoped>
+.example {
+  border: 1px solid var(--td-component-border);
+  border-radius: var(--td-radius-default);
+  .showcase {
+    padding: var(--td-comp-margin-xl);
+    background-color: var(--td-bg-color-container);
+  }
+  .operation {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: var(--td-comp-margin-s);
+    margin-bottom: var(--td-comp-margin-s);
+  }
+  .code {
+    :deep(div[class*='language-']) {
+      margin: 0px;
+      border-radius: 0px;
+    }
+  }
+}
+</style>

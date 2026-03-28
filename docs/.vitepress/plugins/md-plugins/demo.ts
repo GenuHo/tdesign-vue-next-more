@@ -2,12 +2,7 @@ import type { MarkdownRenderer } from 'vitepress'
 import { readFileSync } from 'fs'
 import path from 'path'
 import { docExamplesRoot } from '../../utils/path'
-
-interface ContainerOpts {
-  marker?: string | undefined
-  validate?(params: string): boolean
-  render?: MarkdownRenderer['renderer']['rules']['container']
-}
+import type { ContainerOpts } from 'markdown-it-container'
 
 export const createDemoContainer = (md: MarkdownRenderer): ContainerOpts => {
   return {
@@ -38,7 +33,7 @@ export const createDemoContainer = (md: MarkdownRenderer): ContainerOpts => {
           return `<Demo>`
         } else {
           const openTag = `<Demo source="${encodeURIComponent(
-            md.render(`\`\`\` vue\n${source}\`\`\``),
+            md.render(`\`\`\`vue\n${source}\`\`\``),
           )}" path="${sourceFile}" raw-source="${encodeURIComponent(
             source,
           )}" description="${encodeURIComponent(md.render(description))}">

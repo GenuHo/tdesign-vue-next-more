@@ -5,6 +5,8 @@ import { mdPlugin } from '../plugins/md-plugins'
 import { markdownTransformPlugin } from '../plugins/vite-plugins/markdown-transform'
 import Components from 'unplugin-vue-components/vite'
 import { TDesignResolver } from '@tdesign-vue-next/auto-import-resolver'
+import path from 'path'
+import { docRoot } from '../utils/path'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -27,6 +29,7 @@ export default defineConfig({
     plugins: [
       markdownTransformPlugin(),
       Components({
+        dts: path.resolve(docRoot, 'components.d.ts'),
         resolvers: [
           TDesignResolver({
             library: 'vue-next',

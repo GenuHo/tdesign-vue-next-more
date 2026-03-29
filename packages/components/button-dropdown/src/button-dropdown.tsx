@@ -29,6 +29,9 @@ export default defineComponent({
     buttonProps: {
       type: Object as PropType<TmButtonDropdownProps['buttonProps']>,
     },
+    moreButton: {
+      type: Object as PropType<TmButtonDropdownProps['moreButton']>,
+    },
   },
 
   setup(props: TmButtonDropdownProps) {

@@ -22,7 +22,9 @@
           </t-button>
         </t-space>
       </div>
-      <div class="code" v-show="codeVisible" v-html="source"></div>
+      <TmCollapseTransition>
+        <div class="code" v-show="codeVisible" v-html="source"></div>
+      </TmCollapseTransition>
     </div>
   </template>
 </template>
@@ -33,6 +35,7 @@ import { useLang } from '../hooks/use-lang'
 import vpDemoLocale from '../../locale/vp-components/vp-demo.json'
 import { useClipboard } from '@vueuse/core'
 import { MessagePlugin } from 'tdesign-vue-next'
+import { TmCollapseTransition } from '@tdesign-vue-next-more/components'
 
 const lang = useLang()
 const locale = computed(

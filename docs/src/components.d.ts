@@ -12,21 +12,33 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ChevronDownIcon: typeof import('tdesign-icons-vue-next')['ChevronDownIcon']
     CodeIcon: typeof import('tdesign-icons-vue-next')['CodeIcon']
     CopyIcon: typeof import('tdesign-icons-vue-next')['CopyIcon']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchIcon: typeof import('tdesign-icons-vue-next')['SearchIcon']
     TButton: typeof import('tdesign-vue-next')['Button']
+    TDropdown: typeof import('tdesign-vue-next')['Dropdown']
+    TDropdownItem: typeof import('tdesign-vue-next')['DropdownItem']
+    TDropdownMenu: typeof import('tdesign-vue-next')['DropdownMenu']
     TSpace: typeof import('tdesign-vue-next')['Space']
+    TTag: typeof import('tdesign-vue-next')['Tag']
   }
 }
 
 // For TSX support
 declare global {
+  const ChevronDownIcon: typeof import('tdesign-icons-vue-next')['ChevronDownIcon']
   const CodeIcon: typeof import('tdesign-icons-vue-next')['CodeIcon']
   const CopyIcon: typeof import('tdesign-icons-vue-next')['CopyIcon']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
+  const SearchIcon: typeof import('tdesign-icons-vue-next')['SearchIcon']
   const TButton: typeof import('tdesign-vue-next')['Button']
+  const TDropdown: typeof import('tdesign-vue-next')['Dropdown']
+  const TDropdownItem: typeof import('tdesign-vue-next')['DropdownItem']
+  const TDropdownMenu: typeof import('tdesign-vue-next')['DropdownMenu']
   const TSpace: typeof import('tdesign-vue-next')['Space']
+  const TTag: typeof import('tdesign-vue-next')['Tag']
 }

@@ -1,4 +1,5 @@
 export * from './button-dropdown'
+export * from './collapse-transition'
 export * from './composite-search'
 export * from './composite-search-tags'
 export * from './table'

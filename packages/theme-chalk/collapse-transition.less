@@ -1,0 +1,10 @@
+@import url('./mixins/mixin.less');
+
+.tm-b(collapse-transition, {
+  &-enter-active,
+  &-leave-active {
+    transition:
+      height @anim-duration-base @anim-time-fn-easing,
+      max-height @anim-duration-base @anim-time-fn-easing;
+  }
+});

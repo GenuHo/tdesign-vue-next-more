@@ -36,7 +36,7 @@ export interface TmButtonDropdownItem extends ButtonProps {
  * 按钮下拉菜单组件属性接口
  * 继承自 DropdownProps
  */
-export interface TmButtonDropdownProps extends DropdownProps {
+export interface TmButtonDropdownProps {
   /** 最大显示按钮数量，超出部分自动收纳到"更多"菜单中 */
   max?: number
 

@@ -10,6 +10,7 @@ import type { DropdownOption, TNode } from 'tdesign-vue-next'
 
 import '@tdesign-vue-next-more/theme-chalk/button-dropdown.less'
 import { deleteObjectKeys, getFirstDefined } from '@tdesign-vue-next-more/utils'
+import { isFunction } from 'lodash-unified'
 
 const ns = useNamespace('button-dropdown')
 
@@ -35,7 +36,7 @@ export default defineComponent({
   },
 
   setup(props: TmButtonDropdownProps) {
-    // 根据 max 处理出来需要渲染 button 的数量
+    // 根据 max 处理出来需要渲染 button 的列表
     const buttons = computed(() => {
       if (props.max && props.buttons && props.buttons.length > props.max) {
         return props.buttons?.slice(0, props.max - 1)
@@ -43,7 +44,7 @@ export default defineComponent({
         return props.buttons
       }
     })
-    // 更多 buttons 的数量
+    // 更多 buttons 的列表
     const moreButtons = computed(() => {
       if (props.max && props.buttons && props.buttons.length > props.max) {
         return props.buttons?.slice(props.max - 1)
@@ -54,61 +55,39 @@ export default defineComponent({
     const renderContent = (content: string | TNode) => {
       if (typeof content === 'string') {
         return content
-      } else {
+      } else if (isFunction(content)) {
         // TNode 是一个函数，需要调用它并传入 h 函数
         return content(h)
       }
     }
     const renderDropdownItem = (buttonChildren: TmButtonDropdownItem[]) => {
       return buttonChildren.map((button) => {
-        if (!(button.children && button.children.length > 0)) {
-          return (
-            <t-dropdown-item
-              {...button.dropdownItemProps}
-              onClick={(
-                dropdownItem: DropdownOption,
-                context: {
-                  e: MouseEvent
-                },
-              ) => {
-                button?.onClick?.(context.e)
-              }}
-              disabled={getFirstDefined(
-                button?.disabled,
-                button?.dropdownItemProps?.disabled,
-              )}
-            >
-              <t-tooltip {...button.tooltipProps}>
-                {renderContent(button.content || '')}
-              </t-tooltip>
-            </t-dropdown-item>
-          )
-        } else {
-          return (
-            <t-dropdown-item
-              {...button.dropdownItemProps}
-              onClick={(
-                dropdownItem: DropdownOption,
-                context: {
-                  e: MouseEvent
-                },
-              ) => {
-                button?.onClick?.(context.e)
-              }}
-              disabled={getFirstDefined(
-                button?.disabled,
-                button?.dropdownItemProps?.disabled,
-              )}
-            >
-              <t-tooltip {...button.tooltipProps}>
-                {renderContent(button.content || '')}
-              </t-tooltip>
+        return (
+          <t-dropdown-item
+            {...button.dropdownItemProps}
+            onClick={(
+              dropdownItem: DropdownOption,
+              context: {
+                e: MouseEvent
+              },
+            ) => {
+              button?.onClick?.(context.e)
+            }}
+            disabled={getFirstDefined(
+              button?.disabled,
+              button?.dropdownItemProps?.disabled,
+            )}
+          >
+            <t-tooltip {...button.tooltipProps}>
+              {renderContent(button.content || '')}
+            </t-tooltip>
+            {button.children && button.children.length > 0 && (
               <t-dropdown-menu>
                 {renderDropdownItem(button.children)}
               </t-dropdown-menu>
-            </t-dropdown-item>
-          )
-        }
+            )}
+          </t-dropdown-item>
+        )
       })
     }
     // 处理出来button的传参
@@ -161,7 +140,8 @@ export default defineComponent({
                   <t-button
                     {...buttonProps}
                     content={
-                      props.moreButton?.content || t('tm.buttonDropdown.more')
+                      renderContent(props.moreButton?.content || '') ||
+                      t('tm.buttonDropdown.more')
                     }
                   >
                     {{ suffix: () => <chevron-down-icon></chevron-down-icon> }}

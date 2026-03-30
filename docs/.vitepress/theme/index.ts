@@ -4,6 +4,7 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import VpDemo from '../vitepress/components/vp-demo.vue'
+import TMore from 'tdesign-vue-next-more'
 
 export default {
   extends: DefaultTheme,
@@ -14,5 +15,6 @@ export default {
   },
   enhanceApp({ app /* router, siteData */ }) {
     app.component('Demo', VpDemo)
+    app.use(TMore)
   },
 } satisfies Theme

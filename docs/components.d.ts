@@ -13,8 +13,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ChevronDownIcon: typeof import('tdesign-icons-vue-next')['ChevronDownIcon']
+    ClearIcon: typeof import('tdesign-icons-vue-next')['ClearIcon']
     CodeIcon: typeof import('tdesign-icons-vue-next')['CodeIcon']
     CopyIcon: typeof import('tdesign-icons-vue-next')['CopyIcon']
+    RefreshIcon: typeof import('tdesign-icons-vue-next')['RefreshIcon']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchIcon: typeof import('tdesign-icons-vue-next')['SearchIcon']
@@ -24,14 +26,17 @@ declare module 'vue' {
     TDropdownMenu: typeof import('tdesign-vue-next')['DropdownMenu']
     TSpace: typeof import('tdesign-vue-next')['Space']
     TTag: typeof import('tdesign-vue-next')['Tag']
+    TTooltip: typeof import('tdesign-vue-next')['Tooltip']
   }
 }
 
 // For TSX support
 declare global {
   const ChevronDownIcon: typeof import('tdesign-icons-vue-next')['ChevronDownIcon']
+  const ClearIcon: typeof import('tdesign-icons-vue-next')['ClearIcon']
   const CodeIcon: typeof import('tdesign-icons-vue-next')['CodeIcon']
   const CopyIcon: typeof import('tdesign-icons-vue-next')['CopyIcon']
+  const RefreshIcon: typeof import('tdesign-icons-vue-next')['RefreshIcon']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
   const SearchIcon: typeof import('tdesign-icons-vue-next')['SearchIcon']
@@ -41,4 +46,5 @@ declare global {
   const TDropdownMenu: typeof import('tdesign-vue-next')['DropdownMenu']
   const TSpace: typeof import('tdesign-vue-next')['Space']
   const TTag: typeof import('tdesign-vue-next')['Tag']
+  const TTooltip: typeof import('tdesign-vue-next')['Tooltip']
 }

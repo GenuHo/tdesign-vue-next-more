@@ -7,6 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 import { TDesignResolver } from '@tdesign-vue-next/auto-import-resolver'
 import path from 'path'
 import { docRoot } from '../utils/path'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -26,7 +27,16 @@ export default defineConfig({
     },
   },
   vite: {
+    resolve: {
+      alias: {
+        'tdesign-vue-next-more': path.resolve(
+          docRoot,
+          '../packages/tdesign-vue-next-more',
+        ),
+      },
+    },
     plugins: [
+      vueJsx(),
       markdownTransformPlugin(),
       Components({
         dts: path.resolve(docRoot, 'components.d.ts'),

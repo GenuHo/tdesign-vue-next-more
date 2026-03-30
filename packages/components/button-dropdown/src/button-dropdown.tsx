@@ -81,11 +81,13 @@ export default defineComponent({
             <t-tooltip {...button.tooltipProps}>
               {renderContent(button.content || '')}
             </t-tooltip>
-            {button.children && button.children.length > 0 && (
-              <t-dropdown-menu>
-                {renderDropdownItem(button.children)}
-              </t-dropdown-menu>
-            )}
+            <template>
+              {button.children && button.children.length > 0 && (
+                <t-dropdown-menu>
+                  {renderDropdownItem(button.children)}
+                </t-dropdown-menu>
+              )}
+            </template>
           </t-dropdown-item>
         )
       })

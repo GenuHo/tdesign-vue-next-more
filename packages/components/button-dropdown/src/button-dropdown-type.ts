@@ -5,9 +5,6 @@ import type {
   TooltipProps,
 } from 'tdesign-vue-next'
 
-// 从类型中排除 onClick 属性，避免事件处理冲突
-type WithoutOnClick<T> = Omit<T, 'onClick'>
-
 /**
  * 按钮下拉项的配置接口
  * 继承自 ButtonProps，支持所有按钮属性
@@ -20,13 +17,13 @@ export interface TmButtonDropdownItem extends ButtonProps {
    * 下拉菜单属性配置
    * 当按钮作为下拉菜单触发器时，此属性将传递给 Dropdown 组件
    */
-  dropdownProps?: WithoutOnClick<DropdownProps>
+  dropdownProps?: Omit<DropdownProps, 'onClick'>
 
   /**
    * 下拉菜单项属性配置
    * 当按钮作为下拉菜单选项时，此属性将传递给 DropdownItem 组件
    */
-  dropdownItemProps?: WithoutOnClick<DropdownItemProps>
+  dropdownItemProps?: Omit<DropdownItemProps, 'onClick'>
 
   /** 悬浮提示属性配置 */
   tooltipProps?: TooltipProps
@@ -44,13 +41,13 @@ export interface TmButtonDropdownProps {
   buttons?: TmButtonDropdownItem[]
 
   /** 更多按钮配置，用于配置自动生成的"更多"下拉按钮触发器 */
-  moreButton?: WithoutOnClick<TmButtonDropdownItem>
+  moreButton?: Omit<TmButtonDropdownItem, 'onClick'>
 
   /**
    * 所有按钮的统一配置
    * 可预设按钮样式等基础属性，会被 buttons 中的单项配置覆盖
    */
-  buttonProps?: WithoutOnClick<ButtonProps>
+  buttonProps?: Omit<ButtonProps, 'onClick'>
 }
 
 /**

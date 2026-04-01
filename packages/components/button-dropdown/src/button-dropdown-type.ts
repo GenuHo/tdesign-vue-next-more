@@ -41,7 +41,7 @@ export interface TmButtonDropdownProps {
   buttons?: TmButtonDropdownItem[]
 
   /** 更多按钮配置，用于配置自动生成的"更多"下拉按钮触发器 */
-  moreButton?: Omit<TmButtonDropdownItem, 'onClick'>
+  moreButtonProps?: Omit<TmButtonDropdownItem, 'onClick'>
 
   /**
    * 所有按钮的统一配置

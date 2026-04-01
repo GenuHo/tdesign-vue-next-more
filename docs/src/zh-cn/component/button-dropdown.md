@@ -6,11 +6,11 @@ title: ButtonDropdown
 
 Button组件、Dropdown组件的组合，还结合了Tooltip组件。常用于在表格左上区域的操作、表格操作列等。
 
-当需要在一个区域显示多个按钮，但是按钮过多影响布局时，可以通过ButtonDropdown组件将多余的按钮折叠到"更多"选项中。
+当需要在一个区域显示多个按钮，但是按钮过多影响布局时，可以通过ButtonDropdown组件将多余的按钮折叠到 `更多` 选项中。
 
 ## 基础用法
 
-组件从左到右依次排列
+组件从左到右依次排列。可通过 `buttonProps` 属性设置所有按钮的统一配置，来预设按钮样式等基础属性，会被 buttons 中的单项配置覆盖。
 
 :::demo
 button-dropdown/basic
@@ -18,28 +18,38 @@ button-dropdown/basic
 
 ## 自动折叠
 
-当按钮数量超过设置的最大数量时，多余按钮会自动折叠到"更多"按钮中
+当按钮数量超过设置的最大数量时，多余按钮会自动折叠到 `更多` 按钮中。`buttonProps` 参数会影响到 `更多` 按钮的样式，`moreButtonProps` 参数的优先级会更高。
 
 :::demo
 button-dropdown/fold
 :::
 
-## 表格使用
+## 按钮禁用和提示
 
-:::demo 在表格操作列中使用按钮下拉菜单
-button-dropdown/table
+可以直接通过按钮的 `disabled` 属性进行禁用，也可以通过 `tooltipProps` 属性配置按钮的提示信息。
+
+如果按钮变为下拉菜单，`dropdownItemProps` 的 `disabled` 也会禁用按钮。`TmButtonDropdownProps` 中的 `disabled` 属性优先级会更高
+
+:::demo
+button-dropdown/disabled-tooltip
+:::
+
+## 通过children设置菜单
+
+:::demo
+button-dropdown/children
 :::
 
 ## API
 
 ### TmButtonDropdownProps
 
-| 参数        | 类型                                  | 默认值 | 说明                                                                        |
-| ----------- | ------------------------------------- | ------ | --------------------------------------------------------------------------- |
-| max         | Number                                | 3      | 最大显示按钮数量，超出部分自动收纳到"更多"菜单中                            |
-| buttons     | TmButtonDropdownItem[]                | []     | 按钮数组，构成按钮组和下拉菜单项                                            |
-| buttonProps | Omit<ButtonProps, 'onClick'>          | -      | 所有按钮的统一配置，可预设按钮样式等基础属性，会被 buttons 中的单项配置覆盖 |
-| moreButton  | Omit<TmButtonDropdownItem, 'onClick'> | -      | 更多按钮配置，用于配置自动生成的"更多"下拉按钮触发器                        |
+| 参数            | 类型                                  | 默认值 | 说明                                                                        |
+| --------------- | ------------------------------------- | ------ | --------------------------------------------------------------------------- |
+| max             | Number                                | 3      | 最大显示按钮数量，超出部分自动收纳到 `更多` 菜单中                          |
+| buttons         | TmButtonDropdownItem[]                | []     | 按钮数组，构成按钮组和下拉菜单项                                            |
+| buttonProps     | Omit<ButtonProps, 'onClick'>          | -      | 所有按钮的统一配置，可预设按钮样式等基础属性，会被 buttons 中的单项配置覆盖 |
+| moreButtonProps | Omit<TmButtonDropdownItem, 'onClick'> | -      | `更多` 按钮配置，用于配置自动生成的 `更多` 下拉按钮触发器                   |
 
 ### TmButtonDropdownItem extends [ButtonProps](https://tdesign.tencent.com/vue-next/components/button?tab=api#button-props)
 

@@ -10,7 +10,7 @@ import type { DropdownOption, TNode } from 'tdesign-vue-next'
 
 import '@tdesign-vue-next-more/theme-chalk/button-dropdown.less'
 import { deleteObjectKeys, getFirstDefined } from '@tdesign-vue-next-more/utils'
-import { isFunction } from 'lodash-unified'
+import { isFunction, isUndefined } from 'lodash-unified'
 
 const ns = useNamespace('button-dropdown')
 
@@ -30,8 +30,8 @@ export default defineComponent({
     buttonProps: {
       type: Object as PropType<TmButtonDropdownProps['buttonProps']>,
     },
-    moreButton: {
-      type: Object as PropType<TmButtonDropdownProps['moreButton']>,
+    moreButtonProps: {
+      type: Object as PropType<TmButtonDropdownProps['moreButtonProps']>,
     },
   },
 
@@ -60,36 +60,58 @@ export default defineComponent({
         return content(h)
       }
     }
+    // TODO 解决 dropdown 菜单没有撑满的问题，tooltip悬浮产生提示区域有问题
     const renderDropdownItem = (buttonChildren: TmButtonDropdownItem[]) => {
       return buttonChildren.map((button) => {
-        return (
-          <t-dropdown-item
-            {...button.dropdownItemProps}
-            onClick={(
-              dropdownItem: DropdownOption,
-              context: {
-                e: MouseEvent
-              },
-            ) => {
-              button?.onClick?.(context.e)
-            }}
-            disabled={getFirstDefined(
-              button?.disabled,
-              button?.dropdownItemProps?.disabled,
-            )}
-          >
-            <t-tooltip {...button.tooltipProps}>
-              {renderContent(button.content || '')}
-            </t-tooltip>
-            <template>
-              {button.children && button.children.length > 0 && (
-                <t-dropdown-menu>
-                  {renderDropdownItem(button.children)}
-                </t-dropdown-menu>
+        // 这里还是要分开写才能渲染子菜单
+        if (!(button.children && button.children.length > 0)) {
+          return (
+            <t-dropdown-item
+              {...button.dropdownItemProps}
+              onClick={(
+                dropdownItem: DropdownOption,
+                context: {
+                  e: MouseEvent
+                },
+              ) => {
+                button?.onClick?.(context.e)
+              }}
+              disabled={getFirstDefined(
+                button?.disabled,
+                button?.dropdownItemProps?.disabled,
               )}
-            </template>
-          </t-dropdown-item>
-        )
+            >
+              <t-tooltip {...button.tooltipProps}>
+                {renderContent(button.content || '')}
+              </t-tooltip>
+            </t-dropdown-item>
+          )
+        } else {
+          return (
+            <t-dropdown-item
+              {...button.dropdownItemProps}
+              onClick={(
+                dropdownItem: DropdownOption,
+                context: {
+                  e: MouseEvent
+                },
+              ) => {
+                button?.onClick?.(context.e)
+              }}
+              disabled={getFirstDefined(
+                button?.disabled,
+                button?.dropdownItemProps?.disabled,
+              )}
+            >
+              <t-tooltip {...button.tooltipProps}>
+                {renderContent(button.content || '')}
+              </t-tooltip>
+              <t-dropdown-menu>
+                {renderDropdownItem(button.children)}
+              </t-dropdown-menu>
+            </t-dropdown-item>
+          )
+        }
       })
     }
     // 处理出来button的传参
@@ -133,21 +155,24 @@ export default defineComponent({
     }
     const renderMoreButtons = () => {
       if (moreButtons.value && moreButtons.value.length > 0) {
-        const buttonProps = getButtonProps(props.moreButton || {})
+        const buttonProps = getButtonProps(props.moreButtonProps || {})
         return (
-          <t-dropdown {...props?.moreButton?.dropdownProps}>
+          <t-dropdown {...props?.moreButtonProps?.dropdownProps}>
             {{
               default: () => (
-                <t-tooltip {...props?.moreButton?.tooltipProps}>
+                <t-tooltip {...props?.moreButtonProps?.tooltipProps}>
                   <t-button
                     {...buttonProps}
                     content={
-                      renderContent(props.moreButton?.content || '') ||
-                      t('tm.buttonDropdown.more')
+                      isUndefined(props.moreButtonProps?.content)
+                        ? t('tm.buttonDropdown.more')
+                        : renderContent(props.moreButtonProps.content)
                     }
-                  >
-                    {{ suffix: () => <chevron-down-icon></chevron-down-icon> }}
-                  </t-button>
+                    suffix={
+                      props.moreButtonProps?.suffix ??
+                      (() => <chevron-down-icon></chevron-down-icon>)
+                    }
+                  ></t-button>
                 </t-tooltip>
               ),
               dropdown: () => renderDropdownItem(moreButtons.value || []),

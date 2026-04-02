@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="tsx">
-import { MessagePlugin } from 'tdesign-vue-next'
 import type {
   TmButtonDropdownItem,
   TmButtonDropdownProps,
@@ -69,7 +68,7 @@ const moreButtonProps2: TmButtonDropdownProps['moreButtonProps'] = {
   variant: 'base',
   shape: 'square',
   content: () => {
-    return <more-icon />
+    return <MoreIcon />
   },
   suffix: () => undefined,
 }

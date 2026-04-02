@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { MessagePlugin } from 'tdesign-vue-next'
 import type { TmButtonDropdownItem } from 'tdesign-vue-next-more'
 
 const buttons1: TmButtonDropdownItem[] = [

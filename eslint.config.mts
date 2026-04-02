@@ -5,6 +5,7 @@ import pluginVue from 'eslint-plugin-vue'
 import pluginVitest from '@vitest/eslint-plugin'
 import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import adminAppEslintrcAutoImportJson from './admin-app/.eslintrc-auto-import.json'
+import docsEslintrcAutoImportJson from './docs/.eslintrc-auto-import.json'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -28,6 +29,15 @@ export default [
       },
     },
   },
+  {
+    files: ['docs/**/*.{js,mjs,cjs,ts,tsx,vue}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...docsEslintrcAutoImportJson.globals,
+      },
+    },
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/essential'],
@@ -39,6 +49,12 @@ export default [
     rules: {},
   },
   { files: ['**/__tests__/*'], ...pluginVitest.configs.recommended },
+  {
+    files: ['**/*.tsx', '**/*.vue'],
+    rules: {
+      'no-undef': 'off', // TODO tsx中使用组件的时候会报no-undef，是否有好的办法解决这个问题呢？？先临时关闭
+    },
+  },
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',

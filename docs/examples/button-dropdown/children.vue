@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import { MessagePlugin } from 'tdesign-vue-next'
 import type {
   TmButtonDropdownItem,
   TmButtonDropdownProps,

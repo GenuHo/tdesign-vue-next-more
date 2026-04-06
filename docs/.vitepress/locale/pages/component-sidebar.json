@@ -6,7 +6,10 @@
     },
     {
       "text": "组件",
-      "items": [{ "text": "按钮下拉", "link": "/component/button-dropdown" }]
+      "items": [
+        { "text": "按钮下拉", "link": "/component/button-dropdown" },
+        { "text": "折叠过渡", "link": "/component/collapse-transition" }
+      ]
     }
   ],
   "en": [

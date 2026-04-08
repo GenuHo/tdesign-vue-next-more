@@ -50,7 +50,7 @@ import { useNamespace, useLocale } from '@tdesign-vue-next-more/hooks'
 import type {
   TmCompositeSearchProps,
   TmCompositeSearchFieldItem,
-  TmInputSearchPayload,
+  TmCompositeSearchInputPayload,
 } from './composite-search-type'
 import { Input as TInput } from 'tdesign-vue-next'
 
@@ -107,7 +107,8 @@ const handleClick = () => {
   if (!currentFieldItem.value) return
   if (currentFieldItem.value.type === 'input' && inputValue.value) {
     props.onSearch?.({
-      fieldItem: currentFieldItem.value as TmInputSearchPayload['fieldItem'],
+      fieldItem:
+        currentFieldItem.value as TmCompositeSearchInputPayload['fieldItem'],
       value: inputValue.value.trim(),
       label: inputValue.value.trim(),
     })

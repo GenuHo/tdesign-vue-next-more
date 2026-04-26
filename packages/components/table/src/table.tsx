@@ -13,8 +13,8 @@ import {
 } from 'vue'
 import type {
   TmCompositeSearchFieldItem,
-  TmSearchPayloadValue,
-  TmSearchPayload,
+  TmCompositeSearchPayloadValue,
+  TmCompositeSearchPayload,
   TmCompositeSearchTagsInstance,
   TmCompositeSearchChangeValue,
 } from '@tdesign-vue-next-more/components'
@@ -85,7 +85,7 @@ export default defineComponent({
       return result
     })
 
-    const currentSearchParams = ref<Record<string, TmSearchPayloadValue>>({})
+    const currentSearchParams = ref<Record<string, TmCompositeSearchPayloadValue>>({})
     const selfPage = ref(1)
     const selfPageSize = ref(10)
     const total = ref(0)
@@ -165,7 +165,7 @@ export default defineComponent({
     }
 
     const tmCompositeSearchTagsRef = ref<TmCompositeSearchTagsInstance>()
-    const handleCompositeSearch = (payload: TmSearchPayload) => {
+    const handleCompositeSearch = (payload: TmCompositeSearchPayload) => {
       tmCompositeSearchTagsRef.value?.addTags(payload)
     }
     const handleSearchTagsChange = (v: TmCompositeSearchChangeValue) => {

@@ -11,6 +11,8 @@ export default {
     },
     compositeSearch: {
       search: '搜索',
+      reset: '重置',
+      confirm: '确认',
     },
     table: {
       operation: '操作',

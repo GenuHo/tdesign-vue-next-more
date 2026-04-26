@@ -7,4 +7,6 @@
 export {}
 declare global {
   const MessagePlugin: typeof import('tdesign-vue-next').MessagePlugin
+  const TCheckboxGroup: typeof import('tdesign-vue-next').CheckboxGroup
+  const TRadioGroup: typeof import('tdesign-vue-next').RadioGroup
 }

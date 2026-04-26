@@ -1,0 +1,19 @@
+@import url('./mixins/mixin.less');
+
+.tm-b(composite-search-filter-single, {
+  .t-radio-group {
+    width: 100%;
+    align-items: flex-start;
+    row-gap: 0px;
+
+    .t-radio {
+      width: 100%;
+      margin-right: 0px;
+      padding: @comp-paddingTB-xs @comp-paddingLR-l;
+
+      &:hover {
+        background-color: @bg-color-container-hover;
+      }
+    }
+  }
+});

@@ -9,6 +9,7 @@ import { TDesignResolver } from '@tdesign-vue-next/auto-import-resolver'
 import path from 'path'
 import { docRoot } from '../utils/path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -38,6 +39,7 @@ export default defineConfig({
     },
     plugins: [
       vueJsx(),
+      vueDevTools(),
       markdownTransformPlugin(),
       AutoImport({
         include: [
@@ -53,11 +55,6 @@ export default defineConfig({
             resolveIcons: true,
           }),
         ],
-        eslintrc: {
-          enabled: true,
-          filepath: './.eslintrc-auto-import.json',
-          globalsPropValue: true,
-        },
         dts: path.resolve(docRoot, 'auto-imports.d.ts'),
       }),
       Components({

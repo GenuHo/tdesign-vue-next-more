@@ -5,7 +5,6 @@ import pluginVue from 'eslint-plugin-vue'
 import pluginVitest from '@vitest/eslint-plugin'
 import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import adminAppEslintrcAutoImportJson from './admin-app/.eslintrc-auto-import.json'
-import docsEslintrcAutoImportJson from './docs/.eslintrc-auto-import.json'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -26,15 +25,6 @@ export default [
       globals: {
         ...globals.browser,
         ...adminAppEslintrcAutoImportJson.globals,
-      },
-    },
-  },
-  {
-    files: ['docs/**/*.{js,mjs,cjs,ts,tsx,vue}'],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...docsEslintrcAutoImportJson.globals,
       },
     },
   },

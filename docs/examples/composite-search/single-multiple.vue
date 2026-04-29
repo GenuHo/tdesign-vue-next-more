@@ -1,26 +1,38 @@
 <template>
   <div class="example-single-multiple">
-    <tm-composite-search :search-fields="searchFields" @search="handleSearch">
-    </tm-composite-search>
+    <t-space direction="vertical">
+      <div>search params: {{ getSearchParams() }}</div>
+      <tm-composite-search
+        :search-fields="searchFields"
+        :value="searchPayloads"
+        @search="addSearchPayload"
+        @reset="removeSearchPayload"
+      ></tm-composite-search>
+    </t-space>
   </div>
 </template>
 
 <script setup lang="ts">
-import type {
-  TmCompositeSearchFieldItem,
-  TmCompositeSearchPayload,
-} from 'tdesign-vue-next-more'
+import type { TmCompositeSearchFieldItem } from 'tdesign-vue-next-more'
+import { useCompositeSearch } from 'tdesign-vue-next-more'
+
+const {
+  searchPayloads,
+  addSearchPayload,
+  removeSearchPayload,
+  getSearchParams,
+} = useCompositeSearch()
 
 const searchFields: TmCompositeSearchFieldItem[] = [
   {
     type: 'input',
-    label: 'id',
+    name: 'id',
     field: 'id',
     placeholder: 'please input id',
   },
   {
     type: 'single',
-    label: 'gender',
+    name: 'gender',
     field: 'gender',
     placeholder: 'please select gender',
     list: [
@@ -30,7 +42,7 @@ const searchFields: TmCompositeSearchFieldItem[] = [
   },
   {
     type: 'multiple',
-    label: 'status',
+    name: 'status',
     field: 'status',
     placeholder: 'please select status',
     list: [
@@ -39,9 +51,4 @@ const searchFields: TmCompositeSearchFieldItem[] = [
     ],
   },
 ]
-
-const handleSearch = (payload: TmCompositeSearchPayload) => {
-  MessagePlugin.info(`${payload.fieldItem.label}: ${payload.value}`)
-  console.log(payload)
-}
 </script>

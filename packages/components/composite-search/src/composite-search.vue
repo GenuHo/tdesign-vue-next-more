@@ -24,7 +24,7 @@
           >
             <div :class="ns.e('search-label')" @click.stop>
               <search-icon :class="ns.e('icon-search')" />
-              <span>{{ currentFieldItem?.label }}</span>
+              <span>{{ currentFieldItem?.name }}</span>
               <chevron-down-icon
                 :class="ns.e('icon-down')"
                 :style="iconDownStyle"
@@ -37,7 +37,7 @@
                   :key="item.field"
                   @click="handleSelect(item)"
                 >
-                  {{ item.label }}
+                  {{ item.name }}
                 </t-dropdown-item>
               </t-dropdown-menu>
             </template>
@@ -61,7 +61,6 @@ import { useNamespace, useLocale } from '@tdesign-vue-next-more/hooks'
 import type {
   TmCompositeSearchProps,
   TmCompositeSearchFieldItem,
-  TmCompositeSearchInputPayload,
   TmCompositeSearchSingleFieldItem,
   TmCompositeSearchMultipleFieldItem,
 } from './composite-search-type'
@@ -134,9 +133,9 @@ const inputValue = ref('')
 const handleClickSearch = () => {
   if (!currentFieldItem.value) return
   if (currentFieldItem.value.type === 'input' && inputValue.value) {
-    props.onSearch?.({
-      fieldItem:
-        currentFieldItem.value as TmCompositeSearchInputPayload['fieldItem'],
+    props?.onSearch?.({
+      field: currentFieldItem.value.field,
+      name: currentFieldItem.value.name,
       value: inputValue.value.trim(),
       label: inputValue.value.trim(),
     })
@@ -155,29 +154,23 @@ const handleClickSearch = () => {
 
 const handleReset = () => {
   if (!currentFieldItem.value) return
-  delete filterRecord[currentFieldItem.value.field]
-  if (currentFieldItem.value.type === 'single') {
-    props.onSearch?.({
-      fieldItem: currentFieldItem.value as TmCompositeSearchSingleFieldItem,
-    })
-  } else if (currentFieldItem.value.type === 'multiple') {
-    props.onSearch?.({
-      fieldItem: currentFieldItem.value as TmCompositeSearchMultipleFieldItem,
-      label: [],
-      value: [],
-    })
-  }
+  const field = currentFieldItem.value.field
+  const name = currentFieldItem.value.name
+  props?.onReset?.({ field, name })
 }
 
 const handleConfirm = () => {
   if (!currentFieldItem.value) return
+  const field = currentFieldItem.value.field
+  const name = currentFieldItem.value.name
   if (currentFieldItem.value.type === 'single') {
     const value = filterRecord[currentFieldItem.value.field]
     const label = currentFieldItem.value.list?.find(
       (item) => item.value === value,
     )?.label
-    props.onSearch?.({
-      fieldItem: currentFieldItem.value as TmCompositeSearchSingleFieldItem,
+    props?.onSearch?.({
+      field,
+      name,
       value,
       label,
     })
@@ -187,8 +180,9 @@ const handleConfirm = () => {
     )
     const value = filterRecord[currentFieldItem.value.field] || []
     const label = value.map((item: any) => m.get(item))
-    props.onSearch?.({
-      fieldItem: currentFieldItem.value as TmCompositeSearchMultipleFieldItem,
+    props?.onSearch?.({
+      field,
+      name,
       value,
       label,
     })
@@ -213,6 +207,9 @@ const getPopupContent = () => {
   if (!isSingleOrMultipleFieldItem(currentFieldItem.value)) {
     return
   }
+  const defaultValue = props.value.find(
+    (item) => item.field === currentFieldItem.value?.field,
+  )?.value
   const filterComponentProps: Record<string, any> = {
     options: currentFieldItem.value?.list || [],
     onChange: (val: any) => {
@@ -224,7 +221,7 @@ const getPopupContent = () => {
       }
       filterRecord[currentFieldItem.value.field] = val // 记录筛选值
     },
-    defaultValue: filterRecord[currentFieldItem.value.field],
+    defaultValue,
   }
   const renderComponent = () => {
     if (currentFieldItem.value?.type === 'single') {

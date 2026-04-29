@@ -1,13 +1,17 @@
-import type {
-  TmCompositeSearchPayload,
-  TmCompositeSearchPayloadValue,
-} from '@tdesign-vue-next-more/components'
-
-export interface TmCompositeSearchChangeValue {
-  tags: TmCompositeSearchPayload[]
-  searchParams: Record<string, TmCompositeSearchPayloadValue>
-}
+import type { TmCompositeSearchPayload } from '@tdesign-vue-next-more/components'
 
 export interface TmCompositeSearchTagsProps {
-  onChange?: (value: TmCompositeSearchChangeValue) => void
+  /**
+   * 搜索结果数据模型
+   */
+  value: TmCompositeSearchPayload[]
+  /**
+   * 搜索结果标签关闭事件回调函数
+   * @param value 搜索结果载荷
+   */
+  onClose?: (value: TmCompositeSearchPayload) => void
+  /**
+   * 搜索结果标签清空事件回调函数
+   */
+  onClear?: () => void
 }

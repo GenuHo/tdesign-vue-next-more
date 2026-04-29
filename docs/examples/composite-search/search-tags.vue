@@ -1,39 +1,44 @@
 <template>
   <div class="search-tags">
-    <t-space direction="vertical"
-      ><div>search params: {{ searchParams }}</div>
+    <t-space direction="vertical">
+      <div>search params: {{ getSearchParams() }}</div>
       <tm-composite-search
         :search-fields="searchFields"
-        @search="handleSearch"
+        :value="searchPayloads"
+        @search="addSearchPayload"
+        @reset="removeSearchPayload"
       ></tm-composite-search>
       <tm-composite-search-tags
-        ref="tmCompositeSearchTagsRef"
-        @change="handleSearchChange"
+        :value="searchPayloads"
+        @close="removeSearchPayload"
+        @clear="clearSearchPayloads"
       ></tm-composite-search-tags>
     </t-space>
   </div>
 </template>
 
 <script setup lang="ts">
-import type {
-  TmCompositeSearchFieldItem,
-  TmCompositeSearchPayload,
-  TmCompositeSearchChangeValue,
-} from 'tdesign-vue-next-more'
-import { ref, useTemplateRef } from 'vue'
+import type { TmCompositeSearchFieldItem } from 'tdesign-vue-next-more'
+import { useCompositeSearch } from 'tdesign-vue-next-more'
 
-const tmCompositeSearchTagsRef = useTemplateRef('tmCompositeSearchTagsRef')
+const {
+  searchPayloads,
+  addSearchPayload,
+  removeSearchPayload,
+  clearSearchPayloads,
+  getSearchParams,
+} = useCompositeSearch()
 
 const searchFields: TmCompositeSearchFieldItem[] = [
   {
     type: 'input',
-    label: 'id',
+    name: 'id',
     field: 'id',
     placeholder: 'please input id',
   },
   {
     type: 'single',
-    label: 'gender',
+    name: 'gender',
     field: 'gender',
     placeholder: 'please select gender',
     list: [
@@ -43,7 +48,7 @@ const searchFields: TmCompositeSearchFieldItem[] = [
   },
   {
     type: 'multiple',
-    label: 'status',
+    name: 'status',
     field: 'status',
     placeholder: 'please select status',
     list: [
@@ -52,13 +57,4 @@ const searchFields: TmCompositeSearchFieldItem[] = [
     ],
   },
 ]
-
-const handleSearch = (payload: TmCompositeSearchPayload) => {
-  tmCompositeSearchTagsRef.value?.addTags(payload)
-}
-
-const searchParams = ref<TmCompositeSearchChangeValue['searchParams']>({})
-const handleSearchChange = (value: TmCompositeSearchChangeValue) => {
-  searchParams.value = value.searchParams
-}
 </script>

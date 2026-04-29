@@ -6,10 +6,14 @@ title: CompositeSearch
 
 ## 基础使用
 
-组合搜索可快速配置出来搜索功能。
+组合搜索可快速配置出来搜索功能。需要配合 `useCompositeSearch` 的hook进行使用。
 
-:::warning
-需要注意，`search` 事件中 `TmCompositeSearchPayload` 中 `label` 字段，在input搜索时和 `value` 字段值相同，在single和multiple筛选的时候就是对应 `OptionData` 的label值
+:::warning 字段说明
+需要注意，`search` 事件中 `TmCompositeSearchPayload` 中 `label` 字段，在input搜索时和 `value` 字段值相同，在single和multiple筛选的时候就是对应 `OptionData` 的 `label` 值
+:::
+
+:::warning 为什么需要配合 `useCompositeSearch` 使用？
+`useCompositeSearch` 中已经封装了各种操作搜索的逻辑，使用起来更加方便。同时，CompositeSearch 通常也会搭配其他组件（例如[CompositeSearchTags](/zh-cn/component/composite-search.html#配合compositesearchtags使用)）进行使用，该hook将参数统一暴露到上层管理，将相关的方法直接传给组件即可，这样用户可以只用关心组合搜索相关组件的布局即可。
 :::
 
 :::demo
@@ -34,14 +38,16 @@ composite-search/single-multiple
 composite-search/search-tags
 :::
 
-## API
+## CompositeSearch API
 
 ### TmCompositeSearchProps
 
-| 参数         | 类型                                      | 默认值 | 说明               |
-| ------------ | ----------------------------------------- | ------ | ------------------ |
-| searchFields | TmCompositeSearchFieldItem[]              | -      | 搜索字段配置项数组 |
-| onSearch     | (value: TmCompositeSearchPayload) => void | -      | 搜索事件回调函数   |
+| 参数         | 类型                                        | 默认值 | 说明                 |
+| ------------ | ------------------------------------------- | ------ | -------------------- |
+| searchFields | TmCompositeSearchFieldItem[]                | -      | 搜索字段配置项数组   |
+| value        | TmCompositeSearchPayload[]                  | -      | 搜索结果数据模型     |
+| onSearch     | (payload: TmCompositeSearchPayload) => void | -      | 搜索事件回调函数     |
+| onReset      | (payload: TmCompositeSearchPayload) => void | -      | 重置搜索事件回调函数 |
 
 ### TmCompositeSearchFieldItem
 
@@ -49,35 +55,53 @@ composite-search/search-tags
 
 **TmCompositeSearchInputFieldItem (输入框类型)**
 
-| 参数        | 类型                     | 默认值 | 说明                           |
-| ----------- | ------------------------ | ------ | ------------------------------ |
-| type        | 'input'                  | -      | 字段类型，固定值 'input'       |
-| label       | string \| RenderFunction | -      | 显示标签，支持字符串或渲染函数 |
-| field       | string                   | -      | 对应数据字段名                 |
-| placeholder | string                   | -      | 占位符文本                     |
+| 参数        | 类型    | 默认值 | 说明                     |
+| ----------- | ------- | ------ | ------------------------ |
+| type        | 'input' | -      | 字段类型，固定值 'input' |
+| name        | string  | -      | 字段显示名称             |
+| field       | string  | -      | 对应数据字段名           |
+| placeholder | string  | -      | 占位符文本               |
 
 **TmCompositeSearchSingleFieldItem (单选类型)**
 
-| 参数        | 类型                     | 默认值 | 说明                           |
-| ----------- | ------------------------ | ------ | ------------------------------ |
-| type        | 'single'                 | -      | 字段类型，固定值 'single'      |
-| label       | string \| RenderFunction | -      | 显示标签，支持字符串或渲染函数 |
-| field       | string                   | -      | 对应数据字段名                 |
-| placeholder | string                   | -      | 占位符文本                     |
-| list        | OptionData[]             | -      | 选项数据数组                   |
+| 参数        | 类型         | 默认值 | 说明                      |
+| ----------- | ------------ | ------ | ------------------------- |
+| type        | 'single'     | -      | 字段类型，固定值 'single' |
+| name        | string       | -      | 字段显示名称              |
+| field       | string       | -      | 对应数据字段名            |
+| placeholder | string       | -      | 占位符文本                |
+| list        | OptionData[] | -      | 选项数据数组              |
 
 **TmCompositeSearchMultipleFieldItem (多选类型)**
 
-| 参数        | 类型                     | 默认值 | 说明                           |
-| ----------- | ------------------------ | ------ | ------------------------------ |
-| type        | 'multiple'               | -      | 字段类型，固定值 'multiple'    |
-| label       | string \| RenderFunction | -      | 显示标签，支持字符串或渲染函数 |
-| field       | string                   | -      | 对应数据字段名                 |
-| placeholder | string                   | -      | 占位符文本                     |
-| list        | OptionData[]             | -      | 选项数据数组                   |
+| 参数        | 类型         | 默认值 | 说明                        |
+| ----------- | ------------ | ------ | --------------------------- |
+| type        | 'multiple'   | -      | 字段类型，固定值 'multiple' |
+| name        | string       | -      | 字段显示名称                |
+| field       | string       | -      | 对应数据字段名              |
+| placeholder | string       | -      | 占位符文本                  |
+| list        | OptionData[] | -      | 选项数据数组                |
 
 ### 事件
 
-| 事件名 | 参数                                      | 描述                 |
-| ------ | ----------------------------------------- | -------------------- |
-| search | (value: TmCompositeSearchPayload) => void | 搜索触发时的回调函数 |
+| 事件名 | 参数                                        | 描述                 |
+| ------ | ------------------------------------------- | -------------------- |
+| search | (payload: TmCompositeSearchPayload) => void | 搜索触发时的回调函数 |
+| reset  | (payload: TmCompositeSearchPayload) => void | 重置搜索时的回调函数 |
+
+## CompositeSearchTags API
+
+### TmCompositeSearchTagsProps
+
+| 参数    | 类型                                      | 默认值 | 说明                         |
+| ------- | ----------------------------------------- | ------ | ---------------------------- |
+| value   | TmCompositeSearchPayload[]                | -      | 搜索结果数据模型             |
+| onClose | (value: TmCompositeSearchPayload) => void | -      | 搜索结果标签关闭事件回调函数 |
+| onClear | () => void                                | -      | 搜索结果标签清空事件回调函数 |
+
+### 事件
+
+| 事件名 | 参数                                      | 描述                         |
+| ------ | ----------------------------------------- | ---------------------------- |
+| close  | (value: TmCompositeSearchPayload) => void | 搜索结果标签关闭时的回调函数 |
+| clear  | () => void                                | 搜索结果标签清空时的回调函数 |

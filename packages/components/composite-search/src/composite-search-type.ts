@@ -1,5 +1,4 @@
 import type { OptionData } from 'tdesign-vue-next'
-import type { RenderFunction } from 'vue'
 
 /**
  * 输入框类型的搜索字段配置
@@ -7,8 +6,8 @@ import type { RenderFunction } from 'vue'
 export interface TmCompositeSearchInputFieldItem {
   /** 字段类型，固定值 'input' */
   type: 'input'
-  /** 显示标签，支持字符串或渲染函数 */
-  label: string | RenderFunction
+  /** 字段显示名称 */
+  name: string
   /** 对应数据字段名 */
   field: string
   /** 占位符文本（可选） */
@@ -21,8 +20,8 @@ export interface TmCompositeSearchInputFieldItem {
 export interface TmCompositeSearchSingleFieldItem {
   /** 字段类型，固定值 'single' */
   type: 'single'
-  /** 显示标签，支持字符串或渲染函数 */
-  label: string | RenderFunction
+  /** 字段显示名称 */
+  name: string
   /** 对应数据字段名 */
   field: string
   /** 占位符文本（可选） */
@@ -37,8 +36,8 @@ export interface TmCompositeSearchSingleFieldItem {
 export interface TmCompositeSearchMultipleFieldItem {
   /** 字段类型，固定值 'multiple' */
   type: 'multiple'
-  /** 显示标签，支持字符串或渲染函数 */
-  label: string | RenderFunction
+  /** 字段显示名称 */
+  name: string
   /** 对应数据字段名 */
   field: string
   /** 占位符文本（可选） */
@@ -62,10 +61,19 @@ export interface TmCompositeSearchProps {
   /** 搜索字段配置项数组 */
   searchFields: TmCompositeSearchFieldItem[]
   /**
-   * 搜索事件回调函数（可选）
-   * @param value 搜索结果载荷
+   * 搜索结果数据模型
    */
-  onSearch?: (value: TmCompositeSearchPayload) => void
+  value: TmCompositeSearchPayload[]
+  /**
+   * 搜索事件回调函数
+   * @param payload 搜索结果载荷
+   */
+  onSearch?: (payload: TmCompositeSearchPayload) => void
+  /**
+   * 重置搜索事件回调函数
+   * @param payload 搜索结果载荷
+   */
+  onReset?: (payload: TmCompositeSearchPayload) => void
 }
 
 /**
@@ -76,8 +84,10 @@ export interface TmCompositeSearchInputPayload {
   value: string
   /** 显示标签 */
   label: string
-  /** 原始字段配置项 */
-  fieldItem: TmCompositeSearchInputFieldItem
+  /** 字段 */
+  field: string
+  /** 字段显示名称 */
+  name: string
 }
 
 /**
@@ -88,8 +98,10 @@ export interface TmCompositeSearchSinglePayload {
   value?: OptionData['value']
   /** 显示标签 */
   label?: string
-  /** 原始字段配置项 */
-  fieldItem: TmCompositeSearchSingleFieldItem
+  /** 字段 */
+  field: string
+  /** 字段显示名称 */
+  name: string
 }
 
 /**
@@ -100,8 +112,10 @@ export interface TmCompositeSearchMultiplePayload {
   value?: OptionData['value'][]
   /** 显示标签（可为字符串或字符串数组） */
   label?: string[]
-  /** 原始字段配置项 */
-  fieldItem: TmCompositeSearchMultipleFieldItem
+  /** 字段 */
+  field: string
+  /** 字段显示名称 */
+  name: string
 }
 
 /**

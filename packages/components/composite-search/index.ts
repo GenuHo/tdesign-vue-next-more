@@ -6,6 +6,8 @@ export const TmCompositeSearch: SFCWithInstall<typeof _TmCompositeSearch> =
   withInstall(_TmCompositeSearch)
 export default TmCompositeSearch
 
+export * from './src/hooks'
+
 export * from './src/composite-search-type'
 
 export * from './src/instance'

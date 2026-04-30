@@ -1,21 +1,20 @@
 @import url('./mixins/mixin.less');
 
-.tm-b(composite-search-filter-multiple, {
-  .t-checkbox-group {
+.@{tm-prefix}-composite-search-filter-multiple {
+  .@{prefix}-checkbox-group {
     width: 100%;
     display: flex;
     flex-direction: column;
     row-gap: 0px;
     align-items: flex-start;
 
-    .t-checkbox {
+    .@{prefix}-checkbox {
       width: 100%;
       padding: @comp-paddingTB-xs @comp-paddingLR-l;
 
-
-       &:hover {
+      &:hover {
         background-color: @bg-color-container-hover;
       }
     }
   }
-});
+}

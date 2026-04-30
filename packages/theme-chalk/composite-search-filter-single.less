@@ -1,12 +1,12 @@
 @import url('./mixins/mixin.less');
 
-.tm-b(composite-search-filter-single, {
-  .t-radio-group {
+.@{tm-prefix}-composite-search-filter-single {
+  .@{prefix}-radio-group {
     width: 100%;
     align-items: flex-start;
     row-gap: 0px;
 
-    .t-radio {
+    .@{prefix}-radio {
       width: 100%;
       margin-right: 0px;
       padding: @comp-paddingTB-xs @comp-paddingLR-l;
@@ -16,4 +16,4 @@
       }
     }
   }
-});
+}

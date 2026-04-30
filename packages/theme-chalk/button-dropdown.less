@@ -1,14 +1,1 @@
 @import url('./mixins/mixin.less');
-
-// TODO 待完善变量相关，如何去和tdesign-vue-next规范保持一致
-@tm-button-dropdown-space: 8px;
-
-.tm-b(button-dropdown, {
-  display: flex;
-  align-items: center;
-  gap: @tm-button-dropdown-space;
-
-  .@{prefix}-button {
-    flex-shrink: 0;
-  }
-});

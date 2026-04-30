@@ -1,41 +1,41 @@
 @import url('./mixins/mixin.less');
 
-.tm-b(composite-search, {
-  width: 460px;
+@tm-composite-search-width: 460px;
+
+.@{tm-prefix}-composite-search {
+  width: @tm-composite-search-width;
   max-width: 100%;
   display: flex;
 
-  .tm-e(popup, {
-    .t-popup__content {
+  &__popup {
+    .@{prefix}-popup__content {
       padding: 0px;
     }
-  });
+  }
 
-  .tm-e(filter-pop-content-inner, {
+  &__filter-pop-content-inner {
     padding-top: @comp-paddingTB-s;
     padding-bottom: @comp-paddingTB-l;
-  });
+  }
 
-  .tm-e(search-label, {
+  &__search-label {
     height: 100%;
     display: flex;
     align-items: center;
     padding: 0px @comp-paddingLR-s;
+  }
+  &__icon-search {
+    margin-right: @comp-margin-xs;
+  }
+  &__icon-down {
+    transition: all @anim-duration-base ease-in-out;
+    margin-left: @comp-margin-xs;
+  }
 
-    .tm-e(icon-search, {
-      margin-right: 4px;
-    });
-
-    .tm-e(icon-down, {
-      transition: all 0.2s ease-in-out;
-      margin-left: 4px;
-    });
-  });
-
-  .tm-e(search-input, {
+  &__search-input {
     position: relative;
 
-    .t-input {
+    .@{prefix}-input {
       border-top-right-radius: 0px;
       border-bottom-right-radius: 0px;
       padding-left: 0px;
@@ -44,33 +44,33 @@
         box-shadow: none;
       }
 
-      .t-input__prefix:not(:empty) {
+      .@{prefix}-input__prefix:not(:empty) {
         margin: 0px;
       }
     }
 
-    .t-input--focused {
+    .@{prefix}-input--focused {
       box-shadow: none;
     }
 
-    .t-popup {
+    .@{prefix}-popup {
       width: 100%;
     }
-  });
+  }
 
-  .tm-e(bottom-buttons, {
+  &__bottom-buttons {
     padding: @comp-paddingTB-l @comp-paddingLR-l;
     display: flex;
     justify-content: flex-end;
     border-top: 1px solid @component-border;
 
-    & > .t-button + .t-button {
+    & > .@{prefix}-button + .@{prefix}-button {
       margin-left: @comp-margin-s;
     }
-  });
+  }
 
-  .tm-e(search-button, {
+  &__search-button {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
-  });
-});
+  }
+}

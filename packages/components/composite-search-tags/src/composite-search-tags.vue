@@ -1,22 +1,24 @@
 <template>
   <div :class="ns.b()" v-if="value && value.length > 0">
-    <t-tag
-      variant="outline"
-      :class="ns.e('tag')"
-      closable
-      v-for="tag in value"
-      :key="tag.field"
-      @close="handleClose(tag)"
-    >
-      {{ getTagText(tag) }}
-    </t-tag>
-    <!-- 这里使用t-tag，是为了保持这里的高度和其他tag严格一致 -->
-    <t-tag
-      :class="[ns.e('operation-tag'), ns.em('operation-tag', 'clear')]"
-      @click="handleClear"
-    >
-      {{ t('tm.compositeSearchTags.clear') }}
-    </t-tag>
+    <t-space size="small" break-line>
+      <t-tag
+        variant="outline"
+        :class="ns.e('tag')"
+        closable
+        v-for="tag in value"
+        :key="tag.field"
+        @close="handleClose(tag)"
+      >
+        {{ getTagText(tag) }}
+      </t-tag>
+      <!-- 这里使用t-tag，是为了保持这里的高度和其他tag严格一致 -->
+      <t-tag
+        :class="[ns.e('operation-tag'), ns.em('operation-tag', 'clear')]"
+        @click="handleClear"
+      >
+        {{ t('tm.compositeSearchTags.clear') }}
+      </t-tag>
+    </t-space>
   </div>
 </template>
 

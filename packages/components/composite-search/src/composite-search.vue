@@ -210,6 +210,7 @@ const getPopupContent = () => {
   const defaultValue = props.value.find(
     (item) => item.field === currentFieldItem.value?.field,
   )?.value
+  filterRecord[currentFieldItem.value.field] = defaultValue
   const filterComponentProps: Record<string, any> = {
     options: currentFieldItem.value?.list || [],
     onChange: (val: any) => {

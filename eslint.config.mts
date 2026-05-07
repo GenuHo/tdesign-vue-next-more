@@ -12,9 +12,12 @@ export default [
   {
     ignores: [
       'node_modules',
-      '**/dist/**',
+      'dist',
       'components.d.ts',
       'auto-imports.d.ts',
+      'pnpm-lock.yaml',
+      'docs/.vitepress/cache/*',
+      '!.*',
     ],
   },
   { languageOptions: { globals: globals.browser } },

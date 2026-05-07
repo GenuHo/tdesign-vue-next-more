@@ -13,10 +13,7 @@ import {
 } from 'vue'
 import type {
   TmCompositeSearchFieldItem,
-  TmCompositeSearchPayloadValue,
-  TmCompositeSearchPayload,
   TmCompositeSearchTagsInstance,
-  TmCompositeSearchChangeValue,
 } from '@tdesign-vue-next-more/components'
 import {
   TmCompositeSearchTags,
@@ -24,6 +21,7 @@ import {
   TmButtonDropdown,
   TM_OPERATION_COL_KEY,
   useColumnCalcWidth,
+  useCompositeSearch,
 } from '@tdesign-vue-next-more/components'
 import { TM_TABLE_OWN_KEYS } from './constants'
 import { defaultTableTopRightButtons } from './table-default'
@@ -68,6 +66,18 @@ export default defineComponent({
 
     const data = ref<TableRowData[] | undefined>()
 
+    const {
+      searchPayloads,
+      addSearchPayload,
+      removeSearchPayload,
+      clearSearchPayloads,
+      getSearchParams,
+    } = useCompositeSearch({
+      onSearchChange: () => {
+        search()
+      },
+    })
+
     const searchFields = computed(() => {
       const result: TmCompositeSearchFieldItem[] = []
       props?.columns?.forEach((column) => {
@@ -76,7 +86,7 @@ export default defineComponent({
           result.push({
             type: 'input',
             // todo 这里先默认只支持 string 类型的 title
-            label: (tmTableConfig?.searchLabel || (column.title as string))!,
+            name: (tmTableConfig?.searchLabel || (column.title as string))!,
             field: (tmTableConfig?.searchField || column.colKey)!,
             placeholder: tmTableConfig?.placeholder,
           })
@@ -85,7 +95,9 @@ export default defineComponent({
       return result
     })
 
-    const currentSearchParams = ref<Record<string, TmCompositeSearchPayloadValue>>({})
+    const currentSearchParams = computed(() => {
+      return getSearchParams()
+    })
     const selfPage = ref(1)
     const selfPageSize = ref(10)
     const total = ref(0)
@@ -114,7 +126,8 @@ export default defineComponent({
     })
     const reset = () => {
       selfPage.value = 1
-      tmCompositeSearchTagsRef.value?.clear() // 清空搜索条件，清空之后这个组件下层会向上触发搜索
+      clearSearchPayloads()
+      search()
     }
     const onPaginationChange = (pageInfo: PageInfo) => {
       selfPage.value = pageInfo.current
@@ -165,13 +178,6 @@ export default defineComponent({
     }
 
     const tmCompositeSearchTagsRef = ref<TmCompositeSearchTagsInstance>()
-    const handleCompositeSearch = (payload: TmCompositeSearchPayload) => {
-      tmCompositeSearchTagsRef.value?.addTags(payload)
-    }
-    const handleSearchTagsChange = (v: TmCompositeSearchChangeValue) => {
-      currentSearchParams.value = v.searchParams
-      search()
-    }
 
     const { width } = useWindowSize()
     const topLeftStartRef = ref<HTMLDivElement | null>(null)
@@ -241,7 +247,9 @@ export default defineComponent({
               {isTopLeftShowCompositeSearch.value && (
                 <TmCompositeSearch
                   searchFields={searchFields.value}
-                  onSearch={handleCompositeSearch}
+                  value={searchPayloads.value}
+                  onSearch={addSearchPayload}
+                  onReset={removeSearchPayload}
                 ></TmCompositeSearch>
               )}
             </div>
@@ -253,12 +261,16 @@ export default defineComponent({
             {!isTopLeftShowCompositeSearch.value && (
               <TmCompositeSearch
                 searchFields={searchFields.value}
-                onSearch={handleCompositeSearch}
+                value={searchPayloads.value}
+                onSearch={addSearchPayload}
+                onReset={removeSearchPayload}
               ></TmCompositeSearch>
             )}
             <TmCompositeSearchTags
               ref={tmCompositeSearchTagsRef}
-              onChange={handleSearchTagsChange}
+              value={searchPayloads.value}
+              onClose={removeSearchPayload}
+              onClear={clearSearchPayloads}
             ></TmCompositeSearchTags>
           </div>
           <EnhancedTable

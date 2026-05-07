@@ -21,7 +21,11 @@ const {
   addSearchPayload,
   removeSearchPayload,
   getSearchParams,
-} = useCompositeSearch()
+} = useCompositeSearch({
+  onSearchChange: (searchParams) => {
+    console.log('searchParams: ', searchParams)
+  },
+})
 
 const searchFields: TmCompositeSearchFieldItem[] = [
   {

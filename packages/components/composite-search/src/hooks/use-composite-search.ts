@@ -6,9 +6,18 @@ import type {
 } from '../composite-search-type'
 import { ref, computed } from 'vue'
 
+interface UseCompositeSearchOptions {
+  /** 搜索参数变化时的回调 */
+  onSearchChange?: (
+    params: Record<string, TmCompositeSearchPayloadValue>,
+  ) => void
+}
+
 /**
  * 组合搜索 Hook，用于管理多个搜索条件的组合查询
  * 提供搜索条件的增删改查功能，并维护搜索负载的状态
+ *
+ * @param {UseCompositeSearchOptions} - 可选配置选项
  *
  * @returns {Object} 返回组合搜索相关的状态和方法
  * @returns {ComputedRef<TmCompositeSearchPayload[]>} return.searchPayloads - 当前所有搜索负载的计算属性
@@ -24,9 +33,16 @@ import { ref, computed } from 'vue'
  *   removeSearchPayload,
  *   clearSearchPayloads,
  *   getSearchParams
- * } = useCompositeSearch()
+ * } = useCompositeSearch({
+ *   onSearchChange: (params) => {
+ *     console.log('搜索参数变化:', params);
+ *     // 执行搜索逻辑
+ *   }
+ * })
  */
-export const useCompositeSearch = () => {
+export const useCompositeSearch = (options?: UseCompositeSearchOptions) => {
+  const { onSearchChange } = options || {}
+
   /**
    * 存储搜索负载的响应式数组
    * @type {Ref<TmCompositeSearchPayload[]>}
@@ -42,6 +58,16 @@ export const useCompositeSearch = () => {
   })
 
   /**
+   * 内部辅助函数：更新搜索负载并触发回调
+   * @param {TmCompositeSearchPayload[]} newPayloads - 新的搜索负载数组
+   */
+  const updateSearchPayloads = (newPayloads: TmCompositeSearchPayload[]) => {
+    searchPayloads.value = newPayloads
+    // 在搜索负载发生变更时触发回调
+    onSearchChange?.(getSearchParams())
+  }
+
+  /**
    * 添加或更新搜索负载
    * 如果已存在相同 field 的负载，则更新该位置的数据；
    * 否则在数组末尾追加新的负载
@@ -53,14 +79,14 @@ export const useCompositeSearch = () => {
     )
     if (index > -1) {
       // 更新已存在的搜索条件
-      searchPayloads.value = [
+      updateSearchPayloads([
         ...searchPayloads.value.slice(0, index),
         searchPayload,
         ...searchPayloads.value.slice(index + 1),
-      ]
+      ])
     } else {
       // 添加新的搜索条件
-      searchPayloads.value = [...searchPayloads.value, searchPayload]
+      updateSearchPayloads([...searchPayloads.value, searchPayload])
     }
   }
 
@@ -69,8 +95,8 @@ export const useCompositeSearch = () => {
    * @param {TmCompositeSearchPayload} searchPayload - 要移除的搜索负载对象，根据其 field 属性进行匹配
    */
   const removeSearchPayload = (searchPayload: TmCompositeSearchPayload) => {
-    searchPayloads.value = searchPayloads.value.filter(
-      (item) => item.field !== searchPayload.field,
+    updateSearchPayloads(
+      searchPayloads.value.filter((item) => item.field !== searchPayload.field),
     )
   }
 
@@ -78,7 +104,7 @@ export const useCompositeSearch = () => {
    * 清空所有搜索负载，重置为空数组
    */
   const clearSearchPayloads = () => {
-    searchPayloads.value = []
+    updateSearchPayloads([])
   }
 
   /**

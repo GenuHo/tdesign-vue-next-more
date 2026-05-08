@@ -45,7 +45,8 @@ export default [
   {
     files: ['**/*.tsx', '**/*.vue'],
     rules: {
-      'no-undef': 'off', // TODO tsx中使用组件的时候会报no-undef，是否有好的办法解决这个问题呢？？先临时关闭
+      // TODO，@tdesign-vue-next/auto-import-resolver生成的.eslintrc-auto-import.json中不含有对应的变量
+      'no-undef': 'off', // https://github.com/unplugin/unplugin-auto-import#eslint
     },
   },
   {

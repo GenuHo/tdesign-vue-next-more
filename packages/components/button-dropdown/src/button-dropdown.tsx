@@ -183,7 +183,7 @@ export default defineComponent({
     }
     return () => (
       <div class={ns.b()}>
-        <TSpace size="small" breakLine={true}>
+        <TSpace size="small">
           {renderButtons()}
           {renderMoreButtons()}
         </TSpace>

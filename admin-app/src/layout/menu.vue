@@ -22,7 +22,7 @@ export default defineComponent({
       return appStore.device === 'mobile'
     })
 
-    const openKeys = ref<string[]>([])
+    const openKeys = ref<(string | number)[]>([])
     const selectedKey = ref<string>()
     const findMenuOpenKeys = (target: string) => {
       const result: string[] = []
@@ -79,21 +79,18 @@ export default defineComponent({
           menuTree.forEach((menuItem) => {
             const node =
               menuItem?.children && menuItem?.children.length !== 0 ? (
-                <t-submenu
+                <TSubmenu
                   value={menuItem.name}
                   v-slots={{
                     title: () => t(menuItem.locale as string),
                   }}
                 >
                   {travel(menuItem?.children)}
-                </t-submenu>
+                </TSubmenu>
               ) : (
-                <t-menu-item
-                  value={menuItem.name}
-                  onClick={() => goto(menuItem)}
-                >
+                <TMenuItem value={menuItem.name} onClick={() => goto(menuItem)}>
                   {t(menuItem.locale as string)}
-                </t-menu-item>
+                </TMenuItem>
               )
             nodes.push(node as never)
           })
@@ -104,29 +101,29 @@ export default defineComponent({
       return nodes
     }
     return () => (
-      <t-menu
+      <TMenu
         value={selectedKey.value}
         expanded={openKeys.value}
         collapsed={!isMobile.value && collapsed.value}
         style="height:100%; width:100%;"
-        onExpand={(val: string[]) => (openKeys.value = val)}
+        onExpand={(val: (string | number)[]) => (openKeys.value = val)}
         v-slots={{
           operations: !isMobile.value
             ? () => (
-                <t-button
+                <TButton
                   variant="text"
                   shape="square"
                   onClick={handleCollapseClick}
                   v-slots={{
-                    icon: () => <t-icon name="view-list" />,
+                    icon: () => <TIcon name="view-list" />,
                   }}
-                ></t-button>
+                ></TButton>
               )
             : undefined,
         }}
       >
         {renderSubMenu()}
-      </t-menu>
+      </TMenu>
     )
   },
 })

@@ -66,7 +66,7 @@ export default defineComponent({
         // 这里还是要分开写才能渲染子菜单
         if (!(button.children && button.children.length > 0)) {
           return (
-            <t-dropdown-item
+            <TDropdownItem
               {...button.dropdownItemProps}
               onClick={(
                 dropdownItem: DropdownOption,
@@ -81,14 +81,14 @@ export default defineComponent({
                 button?.dropdownItemProps?.disabled,
               )}
             >
-              <t-tooltip {...button.tooltipProps}>
+              <TTooltip {...button.tooltipProps}>
                 {renderContent(button.content || '')}
-              </t-tooltip>
-            </t-dropdown-item>
+              </TTooltip>
+            </TDropdownItem>
           )
         } else {
           return (
-            <t-dropdown-item
+            <TDropdownItem
               {...button.dropdownItemProps}
               onClick={(
                 dropdownItem: DropdownOption,
@@ -103,13 +103,13 @@ export default defineComponent({
                 button?.dropdownItemProps?.disabled,
               )}
             >
-              <t-tooltip {...button.tooltipProps}>
+              <TTooltip {...button.tooltipProps}>
                 {renderContent(button.content || '')}
-              </t-tooltip>
-              <t-dropdown-menu>
+              </TTooltip>
+              <TDropdownMenu>
                 {renderDropdownItem(button.children)}
-              </t-dropdown-menu>
-            </t-dropdown-item>
+              </TDropdownMenu>
+            </TDropdownItem>
           )
         }
       })
@@ -129,26 +129,26 @@ export default defineComponent({
 
         if (!(button.children && button.children.length > 0)) {
           return (
-            <t-tooltip {...button.tooltipProps}>
-              <t-button {...buttonProps}></t-button>
-            </t-tooltip>
+            <TTooltip {...button.tooltipProps}>
+              <TButton {...buttonProps}></TButton>
+            </TTooltip>
           )
         } else {
           return (
-            <t-dropdown {...button.dropdownProps}>
+            <TDropdown {...button.dropdownProps}>
               {{
                 default: () => (
-                  <t-tooltip {...button.tooltipProps}>
-                    <t-button {...buttonProps}>
+                  <TTooltip {...button.tooltipProps}>
+                    <TButton {...buttonProps}>
                       {{
-                        suffix: () => <chevron-down-icon></chevron-down-icon>,
+                        suffix: () => <ChevronDownIcon></ChevronDownIcon>,
                       }}
-                    </t-button>
-                  </t-tooltip>
+                    </TButton>
+                  </TTooltip>
                 ),
                 dropdown: () => renderDropdownItem(button.children || []),
               }}
-            </t-dropdown>
+            </TDropdown>
           )
         }
       })
@@ -157,27 +157,27 @@ export default defineComponent({
       if (moreButtons.value && moreButtons.value.length > 0) {
         const buttonProps = getButtonProps(props.moreButtonProps || {})
         return (
-          <t-dropdown {...props?.moreButtonProps?.dropdownProps}>
+          <TDropdown {...props?.moreButtonProps?.dropdownProps}>
             {{
               default: () => (
-                <t-tooltip {...props?.moreButtonProps?.tooltipProps}>
-                  <t-button
+                <TTooltip {...props?.moreButtonProps?.tooltipProps}>
+                  <TButton
                     {...buttonProps}
                     content={
                       isUndefined(props.moreButtonProps?.content)
                         ? t('tm.buttonDropdown.more')
-                        : renderContent(props.moreButtonProps.content)
+                        : () => renderContent(props.moreButtonProps!.content!)
                     }
                     suffix={
                       props.moreButtonProps?.suffix ??
-                      (() => <chevron-down-icon></chevron-down-icon>)
+                      (() => <ChevronDownIcon></ChevronDownIcon>)
                     }
-                  ></t-button>
-                </t-tooltip>
+                  ></TButton>
+                </TTooltip>
               ),
               dropdown: () => renderDropdownItem(moreButtons.value || []),
             }}
-          </t-dropdown>
+          </TDropdown>
         )
       }
     }

@@ -157,19 +157,19 @@ export default defineComponent({
       const buttonProps = {
         shape: 'square',
         variant: 'text',
-      }
+      } as const
       return computedTableTopRightButtons.value?.map((button) => {
         if (button.type === 'reset') {
           return (
-            <t-button {...buttonProps} onClick={button?.onClick || reset}>
-              <clear-icon />
-            </t-button>
+            <TButton {...buttonProps} onClick={button?.onClick || reset}>
+              <ClearIcon />
+            </TButton>
           )
         } else if (button.type === 'refresh') {
           return (
-            <t-button {...buttonProps} onClick={button?.onClick || search}>
-              <refresh-icon />
-            </t-button>
+            <TButton {...buttonProps} onClick={button?.onClick || search}>
+              <RefreshIcon />
+            </TButton>
           )
         } else if (button.render) {
           return button.render?.()
@@ -254,7 +254,7 @@ export default defineComponent({
               )}
             </div>
             <div class={ns.e('top-right')}>
-              <t-space size={2}>{getTableTopRightNodes()}</t-space>
+              <TSpace size={2}>{getTableTopRightNodes()}</TSpace>
             </div>
           </div>
           <div class={ns.e('search')}>

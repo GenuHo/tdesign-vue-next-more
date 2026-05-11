@@ -49,3 +49,39 @@ export type OwnKeysStrictUnionTuple<
 export type OptionalKeys<T> = {
   [K in keyof T]-?: undefined extends T[K] ? K : never
 }[keyof T]
+
+/**
+ * Merges an intersection type into a single unified object type.
+ * Resolves TypeScript's display behavior of showing intersection types as multiple objects.
+ *
+ * @example
+ * type A = { a: string };
+ * type B = { b: number };
+ * type C = A & B; // TypeScript shows as { a: string } & { b: number }
+ * type D = MergeType<C>; // Shows as { a: string; b: number }
+ *
+ * @template O - The object type to be merged
+ */
+export type MergeType<O> = {
+  [P in keyof O]: O[P]
+}
+
+/**
+ * Creates a type with specific keys made optional while keeping other properties required.
+ * Provides more granular control than standard Partial by allowing selective optionalization.
+ *
+ * @example
+ * interface User { id: number; name: string; email?: string }
+ * type PartialName = PartialByKeys<User, 'name'>;
+ * // Result: { id: number; name?: string; email?: string }
+ *
+ * @template T - The original type to transform
+ * @template K - Keys to make optional (defaults to all keys when not specified)
+ */
+export type PartialByKeys<T, K extends keyof T = keyof T> = MergeType<
+  {
+    [P in keyof T as P extends K ? P : never]?: T[P]
+  } & {
+    [P in keyof T as P extends K ? never : P]: T[P]
+  }
+>

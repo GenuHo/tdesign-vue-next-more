@@ -4,21 +4,15 @@ import type {
   TableRowData,
   PrimaryTableCol,
 } from 'tdesign-vue-next'
-import type { TmButtonDropdownProps } from '@tdesign-vue-next-more/components'
+import type {
+  TmButtonDropdownProps,
+  TmCompositeSearchFieldItem,
+} from '@tdesign-vue-next-more/components'
+import type { PartialByKeys } from '@tdesign-vue-next-more/utils'
 
 export type TmTableCol<T extends TableRowData = TableRowData> =
   PrimaryTableCol<T> & {
-    // 添加自定义属性
-    tmTableConfig?: {
-      // 是否开启后端搜索功能
-      search?: boolean
-      // 搜索字段，如果没有搜索字段，默认使用列的 dataIndex
-      searchField?: string
-      // 搜索字段的label
-      searchLabel?: string
-      // 搜索输入框placeholder
-      placeholder?: string
-    }
+    searchConfig?: PartialByKeys<TmCompositeSearchFieldItem, 'field' | 'name'>
   }
 
 export type TmTableTopRightButtonItem = {

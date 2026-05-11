@@ -81,14 +81,12 @@ export default defineComponent({
     const searchFields = computed(() => {
       const result: TmCompositeSearchFieldItem[] = []
       props?.columns?.forEach((column) => {
-        const tmTableConfig = column?.tmTableConfig
-        if (tmTableConfig?.search) {
+        const searchConfig = column?.searchConfig
+        if (searchConfig) {
           result.push({
-            type: 'input',
-            // todo 这里先默认只支持 string 类型的 title
-            name: (tmTableConfig?.searchLabel || (column.title as string))!,
-            field: (tmTableConfig?.searchField || column.colKey)!,
-            placeholder: tmTableConfig?.placeholder,
+            ...searchConfig,
+            field: searchConfig?.field || column.colKey!,
+            name: searchConfig?.name || (column.title as string),
           })
         }
       })

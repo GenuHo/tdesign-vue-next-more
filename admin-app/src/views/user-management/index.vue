@@ -120,32 +120,32 @@ const columns: TmTableCol[] = [
   {
     title: 'Name',
     colKey: 'name',
-    tmTableConfig: {
-      search: true,
-      searchField: 'searchName',
-      searchLabel: '名称',
+    searchConfig: {
+      type: 'input',
+      field: 'searchName',
+      name: '名称',
       placeholder: '请输入名称',
     },
   },
   {
     title: 'Salary',
     colKey: 'salary',
-    tmTableConfig: {
-      search: true,
+    searchConfig: {
+      type: 'input',
     },
   },
   {
     title: 'Address',
     colKey: 'address',
-    tmTableConfig: {
-      search: true,
+    searchConfig: {
+      type: 'input',
     },
   },
   {
     title: 'Email',
     colKey: 'email',
-    tmTableConfig: {
-      search: true,
+    searchConfig: {
+      type: 'input',
     },
   },
   operationColumn,

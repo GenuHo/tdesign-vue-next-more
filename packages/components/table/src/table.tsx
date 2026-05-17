@@ -111,10 +111,11 @@ export default defineComponent({
         try {
           loading.value = true
           const requestData = await props.request(allParams)
-          data.value = requestData?.data || []
+          data.value = requestData?.results || []
           total.value = requestData?.total || 0
         } catch (error) {
           console.error(error)
+          data.value = []
         } finally {
           loading.value = false
         }

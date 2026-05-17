@@ -159,7 +159,7 @@ interface MockDataItem {
 }
 
 interface MockResponse {
-  data: MockDataItem[]
+  results: MockDataItem[]
   total: number
   current: number
   pageSize: number
@@ -352,7 +352,7 @@ const fetchData = ({
       const pageData = allData.slice(start, end)
 
       resolve({
-        data: pageData,
+        results: pageData,
         total,
         current,
         pageSize,

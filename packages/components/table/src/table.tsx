@@ -1,6 +1,3 @@
-// table.tsx
-import type { TmTableProps } from './table-type'
-import { useNamespace } from '@tdesign-vue-next-more/hooks'
 import type { PropType, ComputedRef } from 'vue'
 import {
   computed,
@@ -11,6 +8,11 @@ import {
   useTemplateRef,
   watch,
 } from 'vue'
+
+import type { TmTableProps } from './table-type'
+import { TM_TABLE_OWN_KEYS } from './constants'
+import { defaultTableTopRightButtons } from './table-default'
+
 import type {
   TmCompositeSearchFieldItem,
   TmCompositeSearchTagsInstance,
@@ -23,8 +25,9 @@ import {
   useColumnCalcWidth,
   useCompositeSearch,
 } from '@tdesign-vue-next-more/components'
-import { TM_TABLE_OWN_KEYS } from './constants'
-import { defaultTableTopRightButtons } from './table-default'
+import { SCREEN_WIDTH } from '@tdesign-vue-next-more/constants'
+import { useNamespace } from '@tdesign-vue-next-more/hooks'
+import { deleteObjectKeys } from '@tdesign-vue-next-more/utils'
 
 import type { PageInfo, PrimaryTableCol, TableRowData } from 'tdesign-vue-next'
 import { EnhancedTable } from 'tdesign-vue-next'
@@ -33,11 +36,9 @@ import primaryTableProps from 'tdesign-vue-next/es/table/primary-table-props'
 import enhancedTableProps from 'tdesign-vue-next/es/table/enhanced-table-props'
 
 import { useElementSize, useWindowSize } from '@vueuse/core'
+import { isNumber } from 'lodash-unified'
 
 import '@tdesign-vue-next-more/theme-chalk/table.less'
-import { SCREEN_WIDTH } from '@tdesign-vue-next-more/constants'
-import { isNumber } from 'lodash-unified'
-import { deleteObjectKeys } from '@tdesign-vue-next-more/utils'
 
 export default defineComponent({
   name: 'TmTable',
@@ -124,8 +125,7 @@ export default defineComponent({
     })
     const reset = () => {
       selfPage.value = 1
-      clearSearchPayloads()
-      search()
+      clearSearchPayloads() // 清空搜索条件，会自动触发搜索的
     }
     const onPaginationChange = (pageInfo: PageInfo) => {
       selfPage.value = pageInfo.current
@@ -224,7 +224,7 @@ export default defineComponent({
     })
 
     expose({
-      getData: search,
+      getTableData: search,
     })
 
     return () => {

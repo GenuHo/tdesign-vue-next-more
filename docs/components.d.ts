@@ -12,10 +12,13 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CheckCircleFilledIcon: typeof import('tdesign-icons-vue-next')['CheckCircleFilledIcon']
     ChevronDownIcon: typeof import('tdesign-icons-vue-next')['ChevronDownIcon']
     ClearIcon: typeof import('tdesign-icons-vue-next')['ClearIcon']
+    CloseCircleFilledIcon: typeof import('tdesign-icons-vue-next')['CloseCircleFilledIcon']
     CodeIcon: typeof import('tdesign-icons-vue-next')['CodeIcon']
     CopyIcon: typeof import('tdesign-icons-vue-next')['CopyIcon']
+    ErrorCircleFilledIcon: typeof import('tdesign-icons-vue-next')['ErrorCircleFilledIcon']
     MoreIcon: typeof import('tdesign-icons-vue-next')['MoreIcon']
     RefreshIcon: typeof import('tdesign-icons-vue-next')['RefreshIcon']
     RouterLink: typeof import('vue-router')['RouterLink']
@@ -38,10 +41,13 @@ declare module 'vue' {
 
 // For TSX support
 declare global {
+  const CheckCircleFilledIcon: typeof import('tdesign-icons-vue-next')['CheckCircleFilledIcon']
   const ChevronDownIcon: typeof import('tdesign-icons-vue-next')['ChevronDownIcon']
   const ClearIcon: typeof import('tdesign-icons-vue-next')['ClearIcon']
+  const CloseCircleFilledIcon: typeof import('tdesign-icons-vue-next')['CloseCircleFilledIcon']
   const CodeIcon: typeof import('tdesign-icons-vue-next')['CodeIcon']
   const CopyIcon: typeof import('tdesign-icons-vue-next')['CopyIcon']
+  const ErrorCircleFilledIcon: typeof import('tdesign-icons-vue-next')['ErrorCircleFilledIcon']
   const MoreIcon: typeof import('tdesign-icons-vue-next')['MoreIcon']
   const RefreshIcon: typeof import('tdesign-icons-vue-next')['RefreshIcon']
   const RouterLink: typeof import('vue-router')['RouterLink']

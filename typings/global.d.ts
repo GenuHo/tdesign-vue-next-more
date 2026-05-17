@@ -4,6 +4,7 @@ declare module 'vue' {
     TmCollapseTransition: (typeof import('tdesign-vue-next-more'))['TmCollapseTransition']
     TmCompositeSearch: (typeof import('tdesign-vue-next-more'))['TmCompositeSearch']
     TmCompositeSearchTags: (typeof import('tdesign-vue-next-more'))['TmCompositeSearchTags']
+    TmTable: (typeof import('tdesign-vue-next-more'))['TmTable']
   }
 }
 

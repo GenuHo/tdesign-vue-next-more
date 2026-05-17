@@ -97,14 +97,14 @@ export default defineComponent({
     const currentSearchParams = computed(() => {
       return getSearchParams()
     })
-    const selfPage = ref(1)
+    const selfCurrent = ref(1)
     const selfPageSize = ref(10)
     const total = ref(0)
     const loading = ref(false)
     const search = async () => {
       const allParams = {
         ...currentSearchParams.value,
-        page: selfPage.value,
+        current: selfCurrent.value,
         pageSize: selfPageSize.value,
       }
       if (props?.request) {
@@ -124,11 +124,11 @@ export default defineComponent({
       search()
     })
     const reset = () => {
-      selfPage.value = 1
+      selfCurrent.value = 1
       clearSearchPayloads() // 清空搜索条件，会自动触发搜索的
     }
     const onPaginationChange = (pageInfo: PageInfo) => {
-      selfPage.value = pageInfo.current
+      selfCurrent.value = pageInfo.current
       selfPageSize.value = pageInfo.pageSize
       search()
       props.pagination?.onChange?.(pageInfo)
@@ -284,7 +284,7 @@ export default defineComponent({
               props?.request
                 ? {
                     ...props.pagination,
-                    current: selfPage.value,
+                    current: selfCurrent.value,
                     pageSize: selfPageSize.value,
                     total: total.value,
                     onChange: onPaginationChange,

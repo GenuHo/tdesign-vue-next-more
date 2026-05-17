@@ -161,15 +161,15 @@ interface MockDataItem {
 interface MockResponse {
   data: MockDataItem[]
   total: number
-  page: number
+  current: number
   pageSize: number
 }
 
 const fetchData = ({
-  page,
+  current,
   pageSize,
 }: {
-  page: number
+  current: number
   pageSize: number
 }): Promise<MockResponse> => {
   return new Promise((resolve) => {
@@ -347,14 +347,14 @@ const fetchData = ({
       ]
 
       const total = allData.length
-      const start = (page - 1) * pageSize
+      const start = (current - 1) * pageSize
       const end = start + pageSize
       const pageData = allData.slice(start, end)
 
       resolve({
         data: pageData,
         total,
-        page,
+        current,
         pageSize,
       })
     }, 500) // 模拟300ms的网络延迟

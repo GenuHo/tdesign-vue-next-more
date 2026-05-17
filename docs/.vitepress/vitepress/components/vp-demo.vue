@@ -5,10 +5,10 @@
   <template v-else>
     <div v-html="description" />
     <div class="example">
-      <div class="showcase">
+      <div class="showcase vp-raw">
         <slot name="source"></slot>
       </div>
-      <div class="operation">
+      <div class="operation vp-raw">
         <t-space size="small">
           <t-button shape="square" variant="text" @click="copyCode">
             <copy-icon />
@@ -86,20 +86,23 @@ const copyCode = async () => {
 .example {
   border: 1px solid var(--td-component-border);
   border-radius: var(--td-radius-default);
+
   .showcase {
     padding: var(--td-comp-margin-xl);
     background-color: var(--td-bg-color-container);
   }
+
   .operation {
     display: flex;
     justify-content: flex-end;
     margin-right: var(--td-comp-margin-s);
     margin-bottom: var(--td-comp-margin-s);
   }
+
   .code {
     :deep(div[class*='language-']) {
-      margin: 0px;
-      border-radius: 0px;
+      margin: 0;
+      border-radius: 0;
     }
   }
 }
